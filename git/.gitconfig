@@ -1,0 +1,9 @@
+[init]
+	defaultBranch = main
+[user]
+	name = Chattille
+	email = 1023301484@qq.com
+[pretty]
+    graph = format:%C(auto)%h %C(bold blue)%cN %C(brightblack)[%cr]%w(60)%C(auto)%d%n%w(75)%s%n
+[alias]
+    lg = log --graph --all --pretty=graph
