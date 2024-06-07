@@ -1,15 +1,5 @@
 local map = vim.keymap.set
 
--- windows and buffers
-map('n', ';', '<C-w>')
-map('n', '<C-s>', '<Cmd>nohlsearch<CR>')
-map('n', ';s', '<Cmd>silent update<CR>')
-map('n', ';X', '<Cmd>quit!<CR>')
-map('n', ';Q', '<Cmd>update | quit<CR>')
--- map('n', ';w', function()
---     vim.api.nvim_buf_delete(0, {})
--- end)
-
 -- cmdline motion
 map('c', '<C-a>', '<C-b>')
 map('c', '<C-b>', '<Left>')
@@ -17,7 +7,12 @@ map('c', '<C-f>', '<Right>')
 map('c', '<C-j>', '<S-Left>')
 map('c', '<C-k>', '<S-Right>')
 
--- proper quit
+-- windows and buffers
+map('n', ';', '<C-w>')
+map('n', '<C-s>', '<Cmd>nohlsearch<CR>')
+map('n', ';s', '<Cmd>silent update<CR>')
+map('n', ';X', '<Cmd>quit!<CR>')
+map('n', ';Q', '<Cmd>update | quit<CR>')
 
 ---Filetypes ignored on quit
 local autoclosables = {
