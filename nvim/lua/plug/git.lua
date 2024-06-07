@@ -3,7 +3,7 @@ return {
     cond = function()
         local gitdir = require('util.tools').get_root(
             '.git',
-            vim.api.nvim_buf_get_name(0),
+            vim.uv.fs_realpath(vim.api.nvim_buf_get_name(0)) or '',
             'directory'
         )
         return gitdir and true or false
