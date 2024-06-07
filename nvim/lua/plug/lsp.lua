@@ -7,6 +7,8 @@ return {
             require 'conf.lspconf'
         end,
         ft = {
+            'c',
+            'cpp',
             'javascript',
             'lua',
             'python',

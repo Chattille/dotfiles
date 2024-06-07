@@ -103,12 +103,23 @@ end
 -- }}} LSPs {{{
 
 local lspconfig = require 'lspconfig'
+local root_pattern = lspconfig.util.root_pattern
 local servers = {
+    'ccls',
     'lua_ls',
     'tsserver',
 }
 
 local enhanced_opts = {
+    ['ccls'] = function(opts)
+        opts.root_dir = root_pattern(
+            '.clang-format',
+            '.git',
+            'compile_commands.json',
+            '.ccls'
+        )
+        opts.init_options = { cache = { directory = '/tmp/.ccls-cache' } }
+    end,
     ['lua_ls'] = function(opts)
         -- disable default formatter; prefering stylua
         opts.settings = { Lua = { format = { enable = false } } }
