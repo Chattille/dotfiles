@@ -31,6 +31,8 @@ alias zcf="nvim $HOME/.zshrc"
 # Git
 alias g='git'
 alias ga='git add'
+alias gd='git diff'
+alias gds='git diff --staged'
 alias gl='git log'
 alias gm='git commit'
 alias gmm='git commit -m'
