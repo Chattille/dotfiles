@@ -66,7 +66,7 @@ return {
                 desc = 'Flash jump',
             },
             {
-                '<C-j>',
+                '<C-s>',
                 function()
                     require('flash').toggle()
                 end,
