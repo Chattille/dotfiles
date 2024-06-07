@@ -11,6 +11,7 @@ return {
                     disable = {
                         'css',
                         'json',
+                        'make',
                         'markdown_inline',
                         'query',
                         'vimdoc',
@@ -35,6 +36,7 @@ return {
                     disable = {
                         'css',
                         'json',
+                        'make',
                         'markdown_inline',
                         'query',
                         'vimdoc',
@@ -64,6 +66,7 @@ return {
                         'css',
                         'html',
                         'json',
+                        'make',
                         'markdown',
                         'markdown_inline',
                         'query',
@@ -89,6 +92,7 @@ return {
             'javascript',
             'json',
             'lua',
+            'make',
             'markdown',
             'python',
             'query',
@@ -120,7 +124,7 @@ return {
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
-        ft = { -- completely disabled: css, json, query, vimdoc
+        ft = { -- completely disabled: css, json, make, query, vimdoc
             'bash',
             'c',
             'cpp',
