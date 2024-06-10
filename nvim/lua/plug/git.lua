@@ -1,21 +1,11 @@
 return {
     'lewis6991/gitsigns.nvim',
     cond = function()
-        local bufname = vim.api.nvim_buf_get_name(0)
-        local realpath = vim.uv.fs_realpath(bufname)
-        local start
+        local tool = require 'util.tools'
 
-        if bufname == '' then -- [No Name]
-            start = vim.uv.cwd()
-        elseif not realpath then -- new file
-            start = bufname
-        else
-            start = realpath -- current file or symlink
-        end
-
-        local gitdir =
-            require('util.tools').get_root('.git', start, 'directory')
-        return gitdir and true or false
+        local githome =
+            tool.get_root('.git', tool.get_current_dir(), 'directory')
+        return githome and true or false
     end,
     opts = {
         preview_config = { border = 'rounded' },
