@@ -34,7 +34,9 @@ local mappings = {
     },
     definition = {
         lhs = '<Leader>jd',
-        rhs = vim.lsp.buf.definition,
+        rhs = function()
+            require('telescope.builtin').lsp_definitions()
+        end,
         desc = 'Go to definition',
     },
     diagnostic = {
