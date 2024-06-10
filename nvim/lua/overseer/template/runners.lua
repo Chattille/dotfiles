@@ -1,4 +1,5 @@
 return {
+    'cmake',
     'preview',
     'singleton',
 }

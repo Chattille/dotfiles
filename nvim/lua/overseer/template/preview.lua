@@ -16,7 +16,7 @@ local function get_builder(cwd)
         return {
             name = 'Browser-sync',
             strategy = 'jobstart',
-            cmd = { 'browser-sync' },
+            cmd = 'browser-sync',
             args = {
                 'start',
                 '--server',
@@ -65,7 +65,7 @@ return {
                     return {
                         name = 'Open in Browser',
                         strategy = 'jobstart',
-                        cmd = { 'explorer.exe' },
+                        cmd = 'explorer.exe',
                         args = { vim.fn.expand '%:t' },
                     }
                 end,
