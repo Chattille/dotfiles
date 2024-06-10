@@ -33,7 +33,7 @@ return {
                     name = '@execute ' .. fname,
                     tags = { 'RUN', 'DEFAULT' },
                     builder = function()
-                        return { name = 'Execute ' .. fname, cmd = { fpath } }
+                        return { name = 'Execute ' .. fname, cmd = fpath }
                     end,
                 },
             }
@@ -48,7 +48,7 @@ return {
                             name = 'Run with '
                                 .. cmd:sub(1, 1):upper()
                                 .. cmd:sub(2),
-                            cmd = { '/bin/env' },
+                            cmd = '/bin/env',
                             args = { cmd, fname },
                         }
                     end,
