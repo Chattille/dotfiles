@@ -54,7 +54,6 @@ dk() {
         is) shift; command docker images "$@";;
         ns) shift; command docker network ls "$@";;
         pa) shift; command docker container ls --all "$@";;
-        ps) shift; command docker container ls "$@";;
         vs) shift; command docker volume ls "$@";;
         *) command docker "$@";;
     }
