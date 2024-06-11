@@ -146,6 +146,7 @@ local root_pattern = lspconfig.util.root_pattern
 local servers = {
     'ccls',
     'cssls',
+    'emmet_language_server',
     'html',
     'jsonls',
     'lua_ls',
@@ -161,6 +162,12 @@ local enhanced_opts = {
             '.ccls'
         )
         opts.init_options = { cache = { directory = '/tmp/.ccls-cache' } }
+    end,
+    ['emmet_language_server'] = function(opts)
+        opts.init_options = {
+            showSuggestionsAsSnippets = true,
+            syntaxProfiles = { html = 'xhtml' },
+        }
     end,
     ['lua_ls'] = function(opts)
         -- disable default formatter; prefering stylua
