@@ -13,6 +13,7 @@ return {
             'html',
             'javascript',
             'json',
+            'jsonc',
             'less',
             'lua',
             'python',
