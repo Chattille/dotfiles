@@ -108,6 +108,9 @@ local lspconfig = require 'lspconfig'
 local root_pattern = lspconfig.util.root_pattern
 local servers = {
     'ccls',
+    'cssls',
+    'html',
+    'jsonls',
     'lua_ls',
     'tsserver',
 }
@@ -128,9 +131,13 @@ local enhanced_opts = {
     end,
 }
 
+local defcap = require('cmp_nvim_lsp').default_capabilities()
+defcap.textDocument.completion.completionItem.snippetSupport = true
+
 for _, server in ipairs(servers) do
     local opts = {
         on_attach = default_on_attach,
+        capabilities = defcap,
     }
 
     if enhanced_opts[server] then

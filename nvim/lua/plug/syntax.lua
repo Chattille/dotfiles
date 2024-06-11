@@ -14,6 +14,7 @@ return {
                         'make',
                         'markdown_inline',
                         'query',
+                        'scss',
                         'vimdoc',
                         'xml',
                     },
@@ -39,6 +40,7 @@ return {
                         'make',
                         'markdown_inline',
                         'query',
+                        'scss',
                         'vimdoc',
                         'xml',
                     },
@@ -70,6 +72,7 @@ return {
                         'markdown',
                         'markdown_inline',
                         'query',
+                        'scss',
                         'vim',
                         'vimdoc',
                         'xml',
@@ -96,6 +99,7 @@ return {
             'markdown',
             'python',
             'query',
+            'scss',
             'typescript',
             'vim',
             'xml',
@@ -124,7 +128,7 @@ return {
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
-        ft = { -- completely disabled: css, json, make, query, vimdoc
+        ft = { -- completely disabled: css, json, make, query, scss, vimdoc
             'bash',
             'c',
             'cpp',
