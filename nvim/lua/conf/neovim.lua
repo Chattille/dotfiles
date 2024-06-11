@@ -32,6 +32,7 @@ local autoclosables = {
 ---
 ---@param cmd string NeoVim command.
 local function call(cmd)
+    ---@diagnostic disable-next-line: param-type-mismatch
     xpcall(vim.cmd, function(msg)
         local err = string.gsub(msg, '^.+Vim%(%w+%):', '')
         vim.notify(err, vim.log.levels.ERROR)
@@ -44,7 +45,7 @@ end
 local function nonauto_count(wins)
     return #vim.tbl_filter(function(win)
         local buf = vim.api.nvim_win_get_buf(win)
-        local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+        local ft = vim.api.nvim_get_option_value('filetype', { buf = buf })
         return not vim.tbl_contains(autoclosables, ft)
     end, wins)
 end
