@@ -32,6 +32,11 @@ local mappings = {
         rhs = vim.lsp.buf.code_action,
         desc = 'Code actions',
     },
+    codeLens = {
+        lhs = 'gl',
+        rhs = vim.lsp.codelens.run,
+        desc = 'Run codelens in the current line',
+    },
     definition = {
         lhs = '<Leader>jd',
         rhs = function()
@@ -68,7 +73,7 @@ local mappings = {
         end,
         desc = 'List document symbols',
     },
-    formatting = {
+    documentFormatting = {
         lhs = '<Leader>jf',
         rhs = vim.lsp.buf.format,
         desc = 'Format current buffer',
@@ -92,14 +97,46 @@ local mappings = {
     },
 }
 
-local function set_keymaps(bufnr)
-    for _, opt in pairs(mappings) do
-        map('n', opt.lhs, opt.rhs, { desc = opt.desc, buffer = bufnr })
+---@class KeymapOpts
+---@field client unknown LSP cilent.
+---@field bufnr number Buffer number.
+---@field skip? string[] List of providers that should keymaps not be set for.
+
+---Set keymaps.
+---@param opts KeymapOpts
+local function set_keymaps(opts)
+    local caps = opts.client.server_capabilities
+
+    for provider, opt in pairs(mappings) do
+        if
+            provider == 'diagnostic'
+            or (
+                caps[provider .. 'Provider']
+                and not (opts.skip and vim.tbl_contains(opts.skip, provider))
+            )
+        then
+            map(
+                'n',
+                opt.lhs,
+                opt.rhs,
+                { desc = opt.desc, buffer = opts.bufnr }
+            )
+        end
     end
 end
 
-local function default_on_attach(_, bufnr)
-    set_keymaps(bufnr)
+---Default on_attach() for all LSPs.
+local function default_on_attach(client, bufnr)
+    set_keymaps { client = client, bufnr = bufnr }
+end
+
+---Same as the default on_attach() but with formatter disabled.
+local function no_formatter_on_attach(client, bufnr)
+    set_keymaps {
+        client = client,
+        bufnr = bufnr,
+        skip = { 'documentFormatting' },
+    }
 end
 
 -- }}} LSPs {{{
@@ -128,6 +165,7 @@ local enhanced_opts = {
     ['lua_ls'] = function(opts)
         -- disable default formatter; prefering stylua
         opts.settings = { Lua = { format = { enable = false } } }
+        opts.on_attach = no_formatter_on_attach
     end,
 }
 
