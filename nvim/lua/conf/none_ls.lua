@@ -13,7 +13,7 @@ nonels.setup {
                 'n',
                 '<Leader>jf',
                 vim.lsp.buf.format,
-                { desc = 'Foramt current buffer (none-ls)', buffer = bufnr }
+                { desc = 'Format current buffer (none-ls)', buffer = bufnr }
             )
         end
     end,
