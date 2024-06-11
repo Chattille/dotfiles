@@ -84,7 +84,6 @@ cmp.setup {
     },
     sources = cmp.config.sources({
         { name = 'luasnip' },
-        { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
         { name = 'path' },
     }, {
@@ -98,7 +97,6 @@ cmp.setup.cmdline({ '/', '?' }, {
 
 cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
-        { name = 'nvim_lua' },
         { name = 'path' },
     }, {
         { name = 'cmdline' },

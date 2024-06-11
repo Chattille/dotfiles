@@ -5,5 +5,12 @@
         "t",
         "i",
         "fmt"
-    ]
+    ],
+    "runtime.version": "LuaJIT",
+    "workspace": {
+        "checkThirdParty": false,
+        "library": [
+            "/root/.local/nvim-bin/share/nvim/runtime"
+        ]
+    }
 }
