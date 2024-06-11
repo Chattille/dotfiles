@@ -1,11 +1,9 @@
 return {
     'lewis6991/gitsigns.nvim',
     cond = function()
-        local tool = require 'util.tools'
-
-        local githome =
-            tool.get_root('.git', tool.get_current_dir(), 'directory')
-        return githome and true or false
+        return vim.fs.root(require('util.tools').buf_get_real_base(), '.git')
+                and true
+            or false
     end,
     opts = {
         preview_config = { border = 'rounded' },

@@ -6,12 +6,14 @@ local tglt_default = { 'toggleterm', direction = 'horizontal' }
 ---
 ---@return string|nil # Root path.
 local function get_cmake_root()
-    return tool.get_root(
-        'CMakeLists.txt',
-        tool.get_current_dir(),
-        'file',
-        true
-    )
+    local paths = vim.fs.find('CMakeLists.txt', {
+        path = tool.buf_get_real_base(),
+        upward = true,
+        stop = '~',
+        type = 'file',
+        limit = math.huge,
+    })
+    return vim.fs.dirname(paths[#paths])
 end
 
 return {

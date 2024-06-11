@@ -1,4 +1,3 @@
-local get_root = require('util.tools').get_root
 local enabled_fts = {
     'css',
     'html',
@@ -39,7 +38,7 @@ return {
         end,
     },
     generator = function(opts, callback)
-        local root = get_root({ 'package.json', 'index.html' }, opts.dir)
+        local root = vim.fs.root(opts.dir, { 'package.json', 'index.html' })
 
         local tags
         local name
