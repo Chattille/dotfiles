@@ -1,6 +1,6 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-local kinds = require 'util.icons'.kinds
+local kinds = require('util.icons').kinds
 
 cmp.setup {
     snippet = {
@@ -11,11 +11,8 @@ cmp.setup {
     window = { documentation = cmp.config.window.bordered() },
     formatting = {
         format = function(_, vim_item)
-            vim_item.kind = string.format(
-                '%s %s',
-                kinds[vim_item.kind],
-                vim_item.kind
-            )
+            vim_item.kind =
+                string.format('%s %s', kinds[vim_item.kind], vim_item.kind)
             return vim_item
         end,
     },
