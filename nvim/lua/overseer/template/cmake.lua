@@ -1,4 +1,5 @@
-local tool = require 'util.tools'
+local buf_get_real_base = require('util.tools').buf_get_real_base
+
 local enabled_fts = { 'c', 'cpp' }
 local tglt_default = { 'toggleterm', direction = 'horizontal' }
 
@@ -7,7 +8,7 @@ local tglt_default = { 'toggleterm', direction = 'horizontal' }
 ---@return string|nil # Root path.
 local function get_cmake_root()
     local paths = vim.fs.find('CMakeLists.txt', {
-        path = tool.buf_get_real_base(),
+        path = buf_get_real_base(),
         upward = true,
         stop = '~',
         type = 'file',
