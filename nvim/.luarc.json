@@ -10,7 +10,8 @@
     "workspace": {
         "checkThirdParty": false,
         "library": [
-            "/root/.local/nvim-bin/share/nvim/runtime"
+            "/root/.local/nvim-bin/share/nvim/runtime",
+            "${3rd}/luv/library"
         ]
     }
 }
