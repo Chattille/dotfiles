@@ -5,7 +5,7 @@ local tglt_default = { 'toggleterm', direction = 'horizontal' }
 
 ---Get the top root directory for CMake projects.
 ---
----@return string|nil # Root path.
+---@return string? # Root path.
 local function get_cmake_root()
     local paths = vim.fs.find('CMakeLists.txt', {
         path = buf_get_real_base(),
