@@ -34,7 +34,7 @@ end
 return {
     condition = {
         callback = function(opts)
-            return vim.tbl_contains(enabled_fts, opts.filetype)
+            return vim.list_contains(enabled_fts, opts.filetype)
         end,
     },
     generator = function(opts, callback)
@@ -42,7 +42,9 @@ return {
 
         local tags
         local name
-        if vim.tbl_contains({ 'javascript', 'typescript' }, opts.filetype) then
+        if
+            vim.list_contains({ 'javascript', 'typescript' }, opts.filetype)
+        then
             tags = { 'RUN' }
             name = 'live preview'
         else -- default for others

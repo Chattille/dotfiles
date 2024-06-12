@@ -126,7 +126,7 @@ local function set_keymaps(opts)
             provider == 'diagnostic'
             or (
                 caps[provider .. 'Provider']
-                and not (opts.skip and vim.tbl_contains(opts.skip, provider))
+                and not (opts.skip and vim.list_contains(opts.skip, provider))
             )
         then
             map(

@@ -9,7 +9,7 @@ function M.buf_get_real_base()
     local cwd
 
     if bufname == '' then -- [No Name]
-        cwd = vim.uv.cwd()
+        cwd = vim.uv.cwd() or vim.fn.getcwd()
     elseif not realpath then -- new file
         cwd = vim.fs.dirname(bufname)
     else

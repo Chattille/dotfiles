@@ -46,7 +46,7 @@ local function nonauto_count(wins)
     return #vim.tbl_filter(function(win)
         local buf = vim.api.nvim_win_get_buf(win)
         local ft = vim.api.nvim_get_option_value('filetype', { buf = buf })
-        return not vim.tbl_contains(autoclosables, ft)
+        return not vim.list_contains(autoclosables, ft)
     end, wins)
 end
 
@@ -54,7 +54,7 @@ end
 local function quit()
     local wins = vim.api.nvim_tabpage_list_wins(0)
     if
-        vim.tbl_contains(autoclosables, vim.bo.filetype)
+        vim.list_contains(autoclosables, vim.bo.filetype)
         or nonauto_count(wins) >= 2
     then
         call 'quit'

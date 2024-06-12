@@ -20,7 +20,7 @@ end
 return {
     condition = {
         callback = function(opts)
-            return vim.tbl_contains(
+            return vim.list_contains(
                 enabled_fts,
                 opts.filetype or vim.bo.filetype
             ) and (get_cmake_root() and true or false)

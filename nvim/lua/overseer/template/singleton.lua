@@ -18,7 +18,7 @@ local cmdmap = {
 return {
     condition = {
         callback = function(opts)
-            return vim.tbl_contains(enabled_fts, opts.filetype)
+            return vim.list_contains(enabled_fts, opts.filetype)
         end,
     },
     generator = function(opts, callback)
