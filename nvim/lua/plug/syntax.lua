@@ -87,6 +87,7 @@ return {
                     },
                 },
             },
+            endwise = { enable = true },
         },
         ft = {
             'bash',
@@ -144,5 +145,10 @@ return {
             'typescript',
             'vim',
         },
+    },
+
+    {
+        'RRethy/nvim-treesitter-endwise',
+        ft = { 'bash', 'lua', 'ruby', 'vim' },
     },
 }
