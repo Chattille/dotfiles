@@ -23,6 +23,20 @@ vim.lsp.handlers['textDocument/hover'] =
 -- :LspInfo window
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
+-- }}} Initialization {{{
+
+local disable_defaults =
+    vim.api.nvim_create_augroup('DisableLspDefaults', { clear = true })
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local kmap = vim.fn.maparg('K', 'n')
+        if kmap ~= '' then
+            vim.keymap.del('n', 'K', { buffer = ev.buf })
+        end
+    end,
+    group = disable_defaults,
+})
+
 -- }}} Helpers {{{
 
 local map = vim.keymap.set

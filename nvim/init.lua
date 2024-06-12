@@ -10,9 +10,9 @@ vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.tabstop = 4
 vim.bo.modeline = true
-vim.bo.keywordprg = ':help'
 vim.wo.number = true
 vim.wo.signcolumn = 'yes:1'
+vim.go.keywordprg = ':help'
 vim.go.mouse = ''
 vim.go.showmode = false
 
