@@ -1,22 +1,11 @@
-local buf_get_real_base = require('util.files').buf_get_real_base
+local fs = require 'util.files'
 
 local enabled_fts = { 'javascript', 'json', 'jsonc', 'typescript' }
-
----Read file content.
----@param fpath string File path.
----@return string? # File content.
-local function read_file(fpath)
-    local fd = assert(vim.uv.fs_open(fpath, 'r', 420), 'reading file failed')
-    local stat = assert(vim.uv.fs_fstat(fd), 'reading file content failed')
-    local cont = vim.uv.fs_read(fd, stat.size)
-    vim.uv.fs_close(fd)
-    return cont
-end
 
 ---Get root directory of an NPM project.
 ---@return string? # Path to the root directory.
 local function get_npm_root()
-    return vim.fs.root(buf_get_real_base(), 'package.json')
+    return vim.fs.root(fs.buf_get_real_base(), 'package.json')
 end
 
 return {
@@ -34,14 +23,7 @@ return {
         end
 
         -- read package.json
-        local cont = read_file(root .. '/package.json')
-        if not cont then
-            callback {}
-            return
-        end
-
-        local json =
-            vim.json.decode(cont, { luanil = { object = true, array = true } })
+        local json = fs.load_json_file(root .. '/package.json')
         if not json.scripts or vim.tbl_isempty(json.scripts) then
             callback {}
             return
