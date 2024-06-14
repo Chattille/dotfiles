@@ -39,7 +39,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- }}} Helpers {{{
 
+local load_json_file = require('util.files').load_json_file
 local map = vim.keymap.set
+
 local mappings = {
     codeAction = {
         lhs = 'ga',
@@ -153,6 +155,19 @@ local function no_formatter_on_attach(client, bufnr)
     }
 end
 
+---Is currently in a Vue project?
+---@return boolean
+local function is_in_vue()
+    local root = vim.fs.root(0, 'package.json')
+    if root then
+        local json = load_json_file(root .. '/package.json')
+        if json.dependencies and json.dependencies.vue then
+            return true
+        end
+    end
+    return false
+end
+
 -- }}} LSPs {{{
 
 local lspconfig = require 'lspconfig'
@@ -165,6 +180,7 @@ local servers = {
     'jsonls',
     'lua_ls',
     'tsserver',
+    'volar',
 }
 
 local enhanced_opts = {
@@ -187,6 +203,20 @@ local enhanced_opts = {
         -- disable default formatter; prefering stylua
         opts.settings = { Lua = { format = { enable = false } } }
         opts.on_attach = no_formatter_on_attach
+    end,
+    ['tsserver'] = function(opts)
+        if is_in_vue() then -- add support for Vue projects
+            opts.init_options = {
+                plugins = {
+                    {
+                        name = '@vue/typescript-plugin',
+                        location = '',
+                        languages = { 'javascript', 'typescript', 'vue' },
+                    },
+                },
+            }
+            opts.filetypes = { 'javascript', 'typescript', 'vue' }
+        end
     end,
 }
 

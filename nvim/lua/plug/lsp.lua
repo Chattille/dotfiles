@@ -19,6 +19,7 @@ return {
             'python',
             'scss',
             'typescript',
+            'vue',
         },
     },
 

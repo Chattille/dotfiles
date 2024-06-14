@@ -27,6 +27,7 @@ return {
             'python',
             "scss",
             'typescript',
+            'vue',
             'yaml',
         },
     },

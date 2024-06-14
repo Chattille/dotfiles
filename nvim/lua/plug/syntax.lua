@@ -5,6 +5,10 @@ return {
         build = ':TSUpdate',
         opts = {
             highlight = { enable = true },
+            indent = {
+                enable = true,
+                disable = { 'html' },
+            },
             textobjects = {
                 select = {
                     enable = true,
@@ -107,6 +111,7 @@ return {
             'scss',
             'typescript',
             'vim',
+            'vue',
             'xml',
         },
         cmd = {
@@ -144,6 +149,7 @@ return {
             'python',
             'typescript',
             'vim',
+            'vue',
         },
     },
 
