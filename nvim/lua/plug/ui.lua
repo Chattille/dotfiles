@@ -98,8 +98,11 @@ return {
             'help',
             'html',
             'javascript',
+            'less',
             'lua',
+            'scss',
             'typescript',
+            'vue',
         },
     },
 }
