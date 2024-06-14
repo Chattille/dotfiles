@@ -1,4 +1,4 @@
-local buf_get_real_base = require('util.tools').buf_get_real_base
+local buf_get_real_base = require('util.files').buf_get_real_base
 
 local enabled_fts = { 'javascript', 'json', 'jsonc', 'typescript' }
 

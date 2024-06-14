@@ -1,7 +1,7 @@
 return {
     'lewis6991/gitsigns.nvim',
     cond = function()
-        return vim.fs.root(require('util.tools').buf_get_real_base(), '.git')
+        return vim.fs.root(require('util.files').buf_get_real_base(), '.git')
                 and true
             or false
     end,
