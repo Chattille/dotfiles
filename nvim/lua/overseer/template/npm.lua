@@ -1,6 +1,6 @@
 local fs = require 'util.files'
 
-local enabled_fts = { 'javascript', 'json', 'jsonc', 'typescript' }
+local enabled_fts = { 'javascript', 'json', 'jsonc', 'typescript', 'vue' }
 
 ---Get root directory of an NPM project.
 ---@return string? # Path to the root directory.
