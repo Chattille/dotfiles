@@ -200,11 +200,14 @@ local enhanced_opts = {
         }
     end,
     ['lua_ls'] = function(opts)
-        -- disable default formatter; prefering stylua
+        -- disable default formatter; preferring stylua
         opts.settings = { Lua = { format = { enable = false } } }
         opts.on_attach = no_formatter_on_attach
     end,
     ['tsserver'] = function(opts)
+        -- disable default formatter; preferring prettierd
+        opts.on_attach = no_formatter_on_attach
+
         if is_in_vue() then -- add support for Vue projects
             opts.init_options = {
                 plugins = {

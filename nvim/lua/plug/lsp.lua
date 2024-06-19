@@ -113,7 +113,9 @@ return {
         end,
         cmd = { 'NullLsLog', 'NullLsInfo' },
         ft = {
+            'javascript',
             'lua',
+            'typescript',
         },
     },
 }
