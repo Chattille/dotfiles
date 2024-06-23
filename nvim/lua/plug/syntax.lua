@@ -14,6 +14,7 @@ return {
                     enable = true,
                     disable = {
                         'css',
+                        'dockerfile',
                         'json',
                         'jsonc',
                         'make',
@@ -42,6 +43,7 @@ return {
                     enable = true,
                     disable = {
                         'css',
+                        'dockerfile',
                         'json',
                         'jsonc',
                         'make',
@@ -74,6 +76,7 @@ return {
                     disable = {
                         'bash',
                         'css',
+                        'dockerfile',
                         'html',
                         'json',
                         'jsonc',
@@ -101,6 +104,7 @@ return {
             'c',
             'cpp',
             'css',
+            'dockerfile',
             'help',
             'html',
             'javascript',
@@ -144,6 +148,7 @@ return {
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         ft = {
             -- all disabled: css, json, jsonc, make, query, scss, vimdoc, yaml
+            --               dockerfile
             'bash',
             'c',
             'cpp',
