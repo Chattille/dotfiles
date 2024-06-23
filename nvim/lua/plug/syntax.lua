@@ -22,6 +22,7 @@ return {
                         'scss',
                         'vimdoc',
                         'xml',
+                        'yaml',
                     },
                     keymaps = {
                         ['af'] = '@function.outer',
@@ -49,6 +50,7 @@ return {
                         'scss',
                         'vimdoc',
                         'xml',
+                        'yaml',
                     },
                     goto_next_start = {
                         [']f'] = '@function.outer',
@@ -83,6 +85,7 @@ return {
                         'vim',
                         'vimdoc',
                         'xml',
+                        'yaml',
                     },
                     floating_preview_opts = { border = 'rounded' },
                     peek_definition_code = {
@@ -113,6 +116,7 @@ return {
             'vim',
             'vue',
             'xml',
+            'yaml',
         },
         cmd = {
             'TSConfigInfo',
@@ -138,7 +142,8 @@ return {
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
-        ft = { -- all disabled: css, json, jsonc, make, query, scss, vimdoc
+        ft = {
+            -- all disabled: css, json, jsonc, make, query, scss, vimdoc, yaml
             'bash',
             'c',
             'cpp',
