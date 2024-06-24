@@ -13,6 +13,17 @@ local cond = require 'nvim-autopairs.conds'
 npairs.add_rules {
     -- | =<=> <|> =>=> <>|
     Rule('<', '>', { 'html', 'xml' }):with_move(cond.done()),
+
+    -- | =$=> $|$    =$=> $$|$$
+    --        $\pi|$ =$=> $\pi$|
+    Rule('$', '$', 'markdown'):with_move(function(opts)
+        local pair = opts.line:sub(opts.col - 1, opts.col)
+        return pair ~= '$$'
+    end):with_cr(function(opts)
+        local ctx = opts.line:sub(opts.col - 2, opts.col + 2)
+        print(ctx)
+        return ctx == '$$$$'
+    end),
 }
 
 -- [ spaced operators ]
