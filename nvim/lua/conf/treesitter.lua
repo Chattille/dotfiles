@@ -65,14 +65,6 @@ local function devicon(mat, _, bufnr, pred, meta)
     end
 end
 
--- local function debug(mat, pat, bufnr, pred, meta)
---     local id = pred[2]
---     for _, node in ipairs(mat[id]) do
---         vim.print(vim.treesitter.get_node_text(node, bufnr))
---     end
--- end
-
 add_directive('lua-match-clip!', lua_match_clip, { all = true })
--- add_directive('debug!', debug, { all = true })
 add_directive('conceal-pairs!', conceal_pairs, { all = true })
 add_directive('devicon!', devicon, { all = true })
