@@ -1,8 +1,8 @@
 -- providers
 vim.g.loaded_perl_provider = 0
-vim.g.python3_host_prog = '/root/.pyenv/shims/python'
+vim.g.python3_host_prog = vim.fn.expand '~/.pyenv/shims/python'
 vim.g.node_host_prog =
-    vim.fn.glob '/root/.nvm/versions/node/v*/lib/node_modules/neovim/bin/cli.js'
+    vim.fn.glob '~/.nvm/versions/node/v*/lib/node_modules/neovim/bin/cli.js'
 
 -- options
 vim.o.expandtab = true
