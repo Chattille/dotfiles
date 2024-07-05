@@ -139,7 +139,7 @@ typeset -U path=(
 # }}} End user configuration
 
 # {{ Pyenv
-eval "$(pyenv init -)"
+(( $+commands[pyenv] )) && eval "$(pyenv init -)"
 # }}
 
 # {{ NVM
