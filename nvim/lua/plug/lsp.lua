@@ -115,6 +115,7 @@ return {
         ft = {
             'javascript',
             'lua',
+            'python',
             'typescript',
         },
     },

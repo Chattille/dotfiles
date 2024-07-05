@@ -179,6 +179,7 @@ local servers = {
     'html',
     'jsonls',
     'lua_ls',
+    'pyright',
     'tsserver',
     'volar',
 }
