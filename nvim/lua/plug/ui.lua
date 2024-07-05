@@ -29,6 +29,7 @@ return {
             'typescript',
             'vue',
             'yaml',
+            'zsh',
         },
     },
 
