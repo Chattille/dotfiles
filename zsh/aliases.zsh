@@ -23,7 +23,6 @@ alias du='command du -bsh'
 alias oalias="nvim $HOME/.zim/aliases.zsh"
 
 # Utilities
-alias nv='nvim'
 alias nvcf="nvim $HOME/.config/nvim/init.lua"
 alias rezsh='exec zsh'
 alias zcf="nvim $HOME/.zshrc"
@@ -34,6 +33,7 @@ alias ga='git add'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gl='git log'
+alias gla='git log --all'
 alias gm='git commit'
 alias gmm='git commit -m'
 alias gs='git status'
