@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+
+pv() {
+    # init with virtualenvwrapper_lazy.sh first
+    if (( ! $+VIRTUALENVWRAPPER_LAZY_SCRIPT )) {
+        eval "$(pyenv sh-virtualenvwrapper_lazy)"
+    }
+
+    local cmd=$1
+
+    case $1 {
+        # venv management
+        mk|new) shift; mkvirtualenv "$@";;
+        mktmp) shift; mktmpenv "$@";;
+        ls|list) shift; lsvirtualenv "$@";;
+        info|show) shift; showvirtualenv "$@";;
+        rm|del) shift; rmvirtualenv "$@";;
+        cp|copy) shift; cpvirtualenv "$@";;
+        all) shift; allvirtualenv "$@";;
+        # venv control
+        on) shift; workon "$@";;
+        de|lv|leave) shift; deactivate "$@";;
+        # venv navigation
+        cdv) shift; cdvirtualenv "$@";;
+        cds) shift; cdsitepackages "$@";;
+        lss) shift; lssitepackages "$@";;
+        # venv path management
+        add) shift; add2virtualenv "$@";;
+        # project dir management
+        mkp|newp) shift; mkproject "$@";;
+        setp) shift; setvirtualenvproject "$@";;
+        cdp) shift; cdproject "$@";;
+        # installed pkg management
+        wipe|clear|clr) shift; wipeenv "$@";;
+        *) ;;
+    }
+}
+
+pv "$@"

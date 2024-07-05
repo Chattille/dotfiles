@@ -1,0 +1,150 @@
+#compdef pv
+
+_list_envs() {
+    find "$HOME/.virtualenvs/" -maxdepth 1 -mindepth 1 -type d -printf "%f\n"
+}
+
+_list_site_packages_subdir() {
+    if (( $+VIRTUAL_ENV && $+functions[virtualenvwrapper_get_site_packages_dir] )) {
+        virtualenvwrapper_get_site_packages_dir
+    } else {
+        echo $PWD
+    }
+}
+
+_list_added_path() {
+    if (( $+VIRTUAL_ENV && $+functions[virtualenvwrapper_get_site_packages_dir] )) {
+        local pth="$(virtualenvwrapper_get_site_packages_dir)/_virtualenv_path_extensions.pth"
+        if ( test -f $pth ) {
+            cat $pth | head -n -1 | tail -n +2
+        }
+    }
+}
+
+_pv_mk() {
+    _arguments -s -S \
+        '-a[Associate an existing project directory.]:project path:_dir_list' \
+        '*-i[Install one or more packages.]:package:' \
+        '-r[Specify a requirements.txt.]:requirements file:_files' \
+        ':virtualenv name:'
+}
+
+_pv_mktmp() {
+    _arguments -s -S \
+        '(-c --cd -n --no-cd)'{-c,--cd}'[Change CWD to the virtualenv directory during the post-activate phase.]' \
+        '(-c --cd -n --no-cd)'{-n,--no-cd}'[Do not change CWD to the virtualenv directory during the post-activate phase.]'
+}
+
+_pv_ls() {
+    _arguments -s -S \
+        '(-l -b)-b[Brief mode.]' \
+        '(-l -b)-l[Long mode. Default.]' \
+        '-h[Pirnt the help message.]'
+}
+
+_pv_list_envs() {
+    _arguments -s -S \
+        ':virtualenv name:($(_list_envs))'
+}
+
+_pv_cp() {
+    _arguments -s -S \
+        ':virtualenv name:($(_list_envs))' \
+        '::target name:'
+}
+
+_pv_all() {
+    _arguments -s -S \
+        '*:command with arguments:_precommand'
+}
+
+_pv_on() {
+    _arguments -s -S \
+        '(-c --cd -n --no-cd)'{-c,--cd}'[Change CWD to the project directory.]' \
+        '(-c --cd -n --no-cd)'{-n,--no-cd}'[Do not change CWD to the virtualenv directory during the post-activate phase.]' \
+        '::virtualenv name:($(_list_envs))'
+}
+
+_pv_cdv() {
+    _arguments -s -S \
+        ':subdirectory:_files -/ -W ${VIRTUAL_ENV:-$PWD}'
+}
+
+_pv_cds() {
+    _arguments -s -S \
+        ':subdirectory:_files -/ -W $(_list_site_packages_subdir)'
+}
+
+_pv_add() {
+    _arguments -s -S \
+        '-d[Remove the added path from $VIRTUAL_ENV]:directory:($(_list_added_path))' \
+        '*::directory:_dir_list'
+}
+
+_pv_mkp() {
+    _arguments -s -S \
+        '*-t[Use the given template.]:template:' \
+        '*-i[Install one or more packages.]:package:' \
+        '(-f --force)'{-f,--force}'[Create the virtualenv even if the project directory already exists.]' \
+        '-a[Associate an existing project directory.]:project path:_dir_list' \
+        '-r[Specify a requirements.txt.]:requirements file:_files' \
+        ':virtualenv name:'
+}
+
+_pv_setp() {
+    _arguments -s -S \
+        '1::virtualenv name:($(_list_envs))' \
+        '2::project path:_dir_list'
+}
+
+_pv() {
+    local -a subcmds=(
+        {mk,new}':Create a new environment, in the $WORKON_HOME.'
+        'mktmp:Create a new virtualenv in the $WORKON_HOME directory.'
+        {ls,list}':List all of the environments.'
+        {info,show}':Show the details for a single virtualenv.'
+        {rm,del}':Remove an environment, in the $WORKON_HOME.'
+        {cp,copy}':Duplicate an existing virtualenv environment.'
+        'all:Run a command in all virtualenvs under $WORKON_HOME.'
+
+        'on:List or change working virtual environments.'
+        {de,lv,leave}':Switch from a virtualenv to the system-installed version of Python.'
+
+        'cdv:Change the CWD to $VIRTUAL_ENV.'
+        'cds:Change the CWD to the site-packages for $VIRTUAL_ENV.'
+        'lss:Show the content of the site-packages directory $VIRTUAL_ENV.'
+
+        'add:Adds specified directories to the Python path for $VIRTUAL_ENV.'
+
+        {mkp,newp}':Create a new virtualenv in $WORKON_HOME and project directory in $PROJECT_HOME.'
+        'setp:Bind an existing virtualenv to an existing project.'
+        'cdp:Change the CWD to the one specified as the project directory for $VIRTUAL_ENV.'
+
+        {wipe,clear,clr}':Remove all of the installed third-party packages in $VIRTUAL_ENV.'
+    )
+
+    local line state
+    _arguments -C  \
+        "1: :->cmd" \
+        "*:: :->args"
+
+    case "$state" {
+        cmd) _describe 'pv' subcmds;;
+        args)
+            case "$line[1]" {
+                mk|new) _pv_mk;;
+                mktmp) _pv_mktmp;;
+                ls|list) _pv_ls;;
+                info|show) _pv_list_envs;;
+                rm|del) _pv_list_envs;;
+                cp|copy) _pv_cp;;
+                all) _pv_all;;
+                on) _pv_on;;
+                cdv) _pv_cdv;;
+                cds) _pv_cds;;
+                add) _pv_add;;
+                mkp|newp) _pv_mkp;;
+                setp) _pv_setp;;
+            }
+    }
+}

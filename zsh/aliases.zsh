@@ -26,6 +26,7 @@ alias oalias="nvim $HOME/.zim/aliases.zsh"
 alias nvcf="nvim $HOME/.config/nvim/init.lua"
 alias rezsh='exec zsh'
 alias zcf="nvim $HOME/.zshrc"
+alias pv="unalias pv && . $CUSTOM_SCRIPTS/env/pv"
 
 # Git
 alias g='git'

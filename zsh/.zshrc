@@ -119,7 +119,6 @@ unset key
 # }}} End configuration added by Zim install
 
 # {{{ User configuration
-source $HOME/.zim/aliases.zsh
 
 # config
 export LESS=FR
@@ -127,14 +126,22 @@ export LESSHISTFILE=-
 export NVM_DIR="$HOME/.nvm"
 
 # environment
+export CUSTOM_SCRIPTS="$HOME/.dotfiles/scripts"
 export LOCAL_BIN="$HOME/.local/bin"
 export PYENV_ROOT="$HOME/.pyenv"
 
 typeset -U path=(
     "$PYENV_ROOT/bin"
     $LOCAL_BIN
+    "$CUSTOM_SCRIPTS/bin"
     $path
 )
+typeset -U fpath=(
+    "$CUSTOM_SCRIPTS/comp"
+    $fpath
+)
+
+source $HOME/.zim/aliases.zsh
 
 # }}} End user configuration
 
