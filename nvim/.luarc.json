@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
     "diagnostics.globals": [
         "vim",
         "s",
@@ -10,7 +11,7 @@
     "workspace": {
         "checkThirdParty": false,
         "library": [
-            "/root/.local/nvim-bin/share/nvim/runtime",
+            "~/.local/neovim/share/nvim/runtime",
             "${3rd}/luv/library"
         ]
     }
