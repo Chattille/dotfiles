@@ -1,6 +1,9 @@
 -- }}} Directives {{{
 
 local add_directive = vim.treesitter.query.add_directive
+local special_fts = { -- filetypes needed for some adjustments
+    ts = 'typescript',
+}
 
 ---`(#lua-match-clip! @capture "pattern")`
 ---Like `offset!` but the range is set in line with the matched text.
@@ -53,7 +56,9 @@ local function devicon(mat, _, bufnr, pred, meta)
 
     for _, node in ipairs(mat[id]) do
         local lang = vim.treesitter.get_node_text(node, bufnr):lower()
-        local ft = vim.filetype.match { filename = 'a.' .. lang } or lang
+        local ft = vim.filetype.match { filename = 'a.' .. lang }
+            or special_fts[lang]
+            or lang
         local icon = get_icon(ft)
 
         if icon then
