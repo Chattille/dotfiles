@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-pv() {
+vv() {
     # init with virtualenvwrapper_lazy.sh first
     if (( ! $+VIRTUALENVWRAPPER_LAZY_SCRIPT )) {
         eval "$(pyenv sh-virtualenvwrapper_lazy)"
@@ -36,4 +36,4 @@ pv() {
     }
 }
 
-pv "$@"
+vv "$@"

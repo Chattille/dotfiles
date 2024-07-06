@@ -1,4 +1,4 @@
-#compdef pv
+#compdef vv
 
 _list_envs() {
     find "$HOME/.virtualenvs/" -maxdepth 1 -mindepth 1 -type d -printf "%f\n"
@@ -21,7 +21,7 @@ _list_added_path() {
     }
 }
 
-_pv_mk() {
+_vv_mk() {
     _arguments -s -S \
         '-a[Associate an existing project directory.]:project path:_dir_list' \
         '*-i[Install one or more packages.]:package:' \
@@ -29,59 +29,59 @@ _pv_mk() {
         ':virtualenv name:'
 }
 
-_pv_mktmp() {
+_vv_mktmp() {
     _arguments -s -S \
         '(-c --cd -n --no-cd)'{-c,--cd}'[Change CWD to the virtualenv directory during the post-activate phase.]' \
         '(-c --cd -n --no-cd)'{-n,--no-cd}'[Do not change CWD to the virtualenv directory during the post-activate phase.]'
 }
 
-_pv_ls() {
+_vv_ls() {
     _arguments -s -S \
         '(-l -b)-b[Brief mode.]' \
         '(-l -b)-l[Long mode. Default.]' \
         '-h[Pirnt the help message.]'
 }
 
-_pv_list_envs() {
+_vv_list_envs() {
     _arguments -s -S \
         ':virtualenv name:($(_list_envs))'
 }
 
-_pv_cp() {
+_vv_cp() {
     _arguments -s -S \
         ':virtualenv name:($(_list_envs))' \
         '::target name:'
 }
 
-_pv_all() {
+_vv_all() {
     _arguments -s -S \
         '*:command with arguments:_precommand'
 }
 
-_pv_on() {
+_vv_on() {
     _arguments -s -S \
         '(-c --cd -n --no-cd)'{-c,--cd}'[Change CWD to the project directory.]' \
         '(-c --cd -n --no-cd)'{-n,--no-cd}'[Do not change CWD to the virtualenv directory during the post-activate phase.]' \
         '::virtualenv name:($(_list_envs))'
 }
 
-_pv_cdv() {
+_vv_cdv() {
     _arguments -s -S \
         ':subdirectory:_files -/ -W ${VIRTUAL_ENV:-$PWD}'
 }
 
-_pv_cds() {
+_vv_cds() {
     _arguments -s -S \
         ':subdirectory:_files -/ -W $(_list_site_packages_subdir)'
 }
 
-_pv_add() {
+_vv_add() {
     _arguments -s -S \
         '-d[Remove the added path from $VIRTUAL_ENV]:directory:($(_list_added_path))' \
         '*::directory:_dir_list'
 }
 
-_pv_mkp() {
+_vv_mkp() {
     _arguments -s -S \
         '*-t[Use the given template.]:template:' \
         '*-i[Install one or more packages.]:package:' \
@@ -91,13 +91,13 @@ _pv_mkp() {
         ':virtualenv name:'
 }
 
-_pv_setp() {
+_vv_setp() {
     _arguments -s -S \
         '1::virtualenv name:($(_list_envs))' \
         '2::project path:_dir_list'
 }
 
-_pv() {
+_vv() {
     local -a subcmds=(
         {mk,new}':Create a new environment, in the $WORKON_HOME.'
         'mktmp:Create a new virtualenv in the $WORKON_HOME directory.'
@@ -129,22 +129,22 @@ _pv() {
         "*:: :->args"
 
     case "$state" {
-        cmd) _describe 'pv' subcmds;;
+        cmd) _describe 'vv' subcmds;;
         args)
             case "$line[1]" {
-                mk|new) _pv_mk;;
-                mktmp) _pv_mktmp;;
-                ls|list) _pv_ls;;
-                info|show) _pv_list_envs;;
-                rm|del) _pv_list_envs;;
-                cp|copy) _pv_cp;;
-                all) _pv_all;;
-                on) _pv_on;;
-                cdv) _pv_cdv;;
-                cds) _pv_cds;;
-                add) _pv_add;;
-                mkp|newp) _pv_mkp;;
-                setp) _pv_setp;;
+                mk|new) _vv_mk;;
+                mktmp) _vv_mktmp;;
+                ls|list) _vv_ls;;
+                info|show) _vv_list_envs;;
+                rm|del) _vv_list_envs;;
+                cp|copy) _vv_cp;;
+                all) _vv_all;;
+                on) _vv_on;;
+                cdv) _vv_cdv;;
+                cds) _vv_cds;;
+                add) _vv_add;;
+                mkp|newp) _vv_mkp;;
+                setp) _vv_setp;;
             }
     }
 }
