@@ -1,20 +1,8 @@
 -- }}} UI {{{
 
-local icons = require 'util.icons'
-local sev = vim.diagnostic.severity
-
 -- diagnostic icons
-vim.diagnostic.config {
-    severity_sort = true,
-    signs = {
-        text = {
-            [sev.ERROR] = icons.diagnostics.error,
-            [sev.WARN] = icons.diagnostics.warning,
-            [sev.INFO] = icons.diagnostics.info,
-            [sev.HINT] = icons.diagnostics.hint,
-        },
-    },
-}
+local helpers = require 'util.helpers'
+helpers.set_diagnostic_icons()
 
 -- hover window
 vim.lsp.handlers['textDocument/hover'] =
@@ -60,13 +48,7 @@ local mappings = {
         end,
         desc = 'Go to definition',
     },
-    diagnostic = {
-        lhs = '<Leader>jD',
-        rhs = function()
-            require('trouble').toggle { mode = 'diagnostics' }
-        end,
-        desc = 'Toggle diagnostic window',
-    },
+    diagnostic = helpers.get_diagnostic_keymap(),
     documentSymbol = {
         lhs = '<Leader>jo',
         rhs = function()
