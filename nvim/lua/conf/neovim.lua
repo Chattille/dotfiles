@@ -7,6 +7,9 @@ map('c', '<C-f>', '<Right>')
 map('c', '<C-j>', '<S-Left>')
 map('c', '<C-k>', '<S-Right>')
 
+-- comment
+map('n', 'gcu', 'gcgc', { remap = true })
+
 -- windows and buffers
 map('n', ';', '<C-w>')
 map('n', '<C-s>', '<Cmd>nohlsearch<CR>')
