@@ -48,9 +48,9 @@ return {
             { 'gcO', desc = 'Add line-wise comment on the current line' },
             { 'gco', desc = 'Add line-wise comment on the next line' },
             { 'gcA', desc = 'Add line-wise comment at the end of line' },
-            { 'gc', mode = { 'o', 'x' }, desc = 'Toggle line-wise comment' },
+            { 'gc', mode = { 'n', 'x' }, desc = 'Toggle line-wise comment' },
             { 'gbc', desc = 'Toggel block-wise comment' },
-            { 'gb', mode = { 'o', 'x' }, desc = 'Toggle block-wise comment' },
+            { 'gb', mode = { 'n', 'x' }, desc = 'Toggle block-wise comment' },
         },
     },
 
