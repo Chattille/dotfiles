@@ -49,6 +49,7 @@ return {
             { 'gco', desc = 'Add line-wise comment on the next line' },
             { 'gcA', desc = 'Add line-wise comment at the end of line' },
             { 'gc', mode = { 'n', 'x' }, desc = 'Toggle line-wise comment' },
+            { 'gcu', 'gcgc', remap = true, desc = 'Toggle adjacent comments' },
             { 'gbc', desc = 'Toggel block-wise comment' },
             { 'gb', mode = { 'n', 'x' }, desc = 'Toggle block-wise comment' },
         },
