@@ -39,6 +39,21 @@ return {
         },
     },
 
+    -- commenter
+    {
+        'numToStr/Comment.nvim',
+        config = true,
+        keys = {
+            { 'gcc', desc = 'Toggle line-wise comment' },
+            { 'gcO', desc = 'Add line-wise comment on the current line' },
+            { 'gco', desc = 'Add line-wise comment on the next line' },
+            { 'gcA', desc = 'Add line-wise comment at the end of line' },
+            { 'gc', mode = { 'o', 'x' }, desc = 'Toggle line-wise comment' },
+            { 'gbc', desc = 'Toggel block-wise comment' },
+            { 'gb', mode = { 'o', 'x' }, desc = 'Toggle block-wise comment' },
+        },
+    },
+
     -- file explorer
     {
         'nvim-tree/nvim-tree.lua',
