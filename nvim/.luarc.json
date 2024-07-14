@@ -1,7 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
     "diagnostics.globals": [
-        "vim",
         "s",
         "t",
         "i",
@@ -9,7 +8,7 @@
     ],
     "runtime.version": "LuaJIT",
     "workspace": {
-        "checkThirdParty": false,
+        "checkThirdParty": "ApplyInMemory",
         "library": [
             "~/.local/neovim/share/nvim/runtime",
             "${3rd}/luv/library"

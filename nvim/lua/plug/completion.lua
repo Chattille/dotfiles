@@ -28,5 +28,6 @@ return {
         config = function()
             require 'conf.snippet'
         end,
+        ft = { 'lua', 'javascript', 'python', 'typescript' },
     },
 }
