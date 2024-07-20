@@ -24,6 +24,7 @@ return {
             'jsonc',
             "less",
             'lua',
+            'ps1',
             'python',
             "scss",
             'typescript',
