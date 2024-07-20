@@ -1,4 +1,5 @@
 {
-    "detachKeys": "ctrl-q,ctrl-q",
-    "psFormat": "[{{.Names}}]:\t\t{{.Status}}\n  Image: {{.Image}}\n  Ports: {{.Ports}}\n  Size:  {{.Size}}\n"
+  "credsStore": "desktop.exe",
+  "detachKeys": "ctrl-q,ctrl-q",
+  "psFormat": "[{{.Names}}]:\t\t{{.Status}}\n  Image: {{.Image}}\n  Ports: {{.Ports}}\n  Size:  {{.Size}}\n"
 }
