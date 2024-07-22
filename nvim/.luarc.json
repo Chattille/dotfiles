@@ -10,7 +10,7 @@
     "workspace": {
         "checkThirdParty": "ApplyInMemory",
         "library": [
-            "~/.local/neovim/share/nvim/runtime",
+            "$VIMRUNTIME",
             "${3rd}/luv/library"
         ]
     }
