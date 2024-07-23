@@ -18,18 +18,7 @@ map('n', ';X', '<Cmd>quit!<CR>')
 map('n', ';Q', '<Cmd>update | quit<CR>')
 
 ---Filetypes ignored on quit
-local autoclosables = {
-    'NvimTree',
-    'Outline',
-    'OverseerList',
-    'dap-repl',
-    'dapui_console',
-    'dapui_scopes',
-    'dapui_stacks',
-    'dapui_watches',
-    'dapui_breakpoints',
-    'toggleterm',
-}
+local autoclosables = { 'nofile', 'terminal' }
 
 ---Print out less verbose error messages.
 ---
@@ -48,8 +37,8 @@ end
 local function nonauto_count(wins)
     return #vim.tbl_filter(function(win)
         local buf = vim.api.nvim_win_get_buf(win)
-        local ft = vim.api.nvim_get_option_value('filetype', { buf = buf })
-        return not vim.list_contains(autoclosables, ft)
+        local bt = vim.api.nvim_get_option_value('buftype', { buf = buf })
+        return not vim.list_contains(autoclosables, bt)
     end, wins)
 end
 
@@ -57,13 +46,17 @@ end
 local function quit()
     local wins = vim.api.nvim_tabpage_list_wins(0)
     if
-        vim.list_contains(autoclosables, vim.bo.filetype)
+        vim.list_contains(autoclosables, vim.bo.buftype)
         or nonauto_count(wins) >= 2
     then
         call 'quit'
         return
     end
 
+    -- start from other windows
+    table.sort(wins, function(a, b)
+        return a > b
+    end)
     -- last non-autoclosable window
     for _, win in ipairs(wins) do -- close every window
         call('call win_execute(' .. win .. ', "quit")')
