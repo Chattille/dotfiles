@@ -1,23 +1,40 @@
-local map = vim.keymap.set
-local del = vim.keymap.del
 local api = require 'nvim-tree.api'
 local git_icons = require('util.icons').git
 
-vim.api.nvim_set_hl(0, 'NvimTreeOpenedHL', { fg = '#f5c2e7', underline = true })
+vim.api.nvim_set_hl(
+    0,
+    'NvimTreeOpenedHL',
+    { fg = '#f5c2e7', underline = true }
+)
 
 require('nvim-tree').setup {
     on_attach = function(bufnr)
+        local function bufmap(lhs, rhs, desc)
+            vim.keymap.set(
+                'n',
+                lhs,
+                rhs,
+                { buffer = bufnr, desc = 'nvim-tree: ' .. desc }
+            )
+        end
+        local function bufdel(lhs)
+            vim.keymap.del('n', lhs, { buffer = bufnr })
+        end
+
         api.config.mappings.default_on_attach(bufnr)
 
-        del('n', 'o', { buffer = bufnr })
-        del('n', '<CR>', { buffer = bufnr })
+        bufdel 'o'
+        bufdel '<CR>'
+        bufdel ']c'
+        bufdel '[c'
+        bufdel 'd'
+        bufdel 'D'
 
-        map(
-            'n',
-            '<Space>',
-            api.node.open.edit,
-            { buffer = bufnr, desc = 'nvim-tree: Open' }
-        )
+        bufmap('<Space>', api.node.open.edit, 'Open')
+        bufmap(']g', api.node.navigate.git.next, 'Next Git')
+        bufmap('[g', api.node.navigate.git.prev, 'Prev Git')
+        bufmap('d', api.fs.trash, 'Trash')
+        bufmap('D', api.fs.remove, 'Delete')
     end,
     view = {
         width = 25,
@@ -26,20 +43,25 @@ require('nvim-tree').setup {
     renderer = {
         add_trailing = true,
         group_empty = true,
+        highlight_git = 'icon',
         special_files = {
             'Cargo.toml',
+            'CMakeLists.txt',
+            'LICENCE',
+            'LICENSE',
             'Makefile',
+            'package.json',
+            'package-lock.json',
             'README.md',
             'readme.md',
         },
         highlight_opened_files = 'name',
         indent_markers = { enable = true },
         icons = {
-            glyphs = {
-                git = git_icons,
-            },
+            glyphs = { git = git_icons },
         },
     },
+    trash = { cmd = 'trash' },
     actions = {
         file_popup = {
             open_win_config = { border = 'rounded' },
@@ -48,6 +70,6 @@ require('nvim-tree').setup {
     update_focused_file = { enable = true },
 }
 
-map('n', '<C-k>', function()
+vim.keymap.set('n', '<C-k>', function()
     api.tree.toggle { find_file = true }
 end, { desc = 'Toggle NvimTree' })
