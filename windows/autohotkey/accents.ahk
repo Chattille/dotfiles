@@ -26,6 +26,7 @@ Trigger := 0
 !i::global Trigger := 6 ; circumflex
 !,::global Trigger := 7 ; cedilla
 !n::global Trigger := 8 ; tilde
+!b::global Trigger := 9 ; breve
 
 MakeAccent(Char)
 {
@@ -313,4 +314,55 @@ MakeAccent(Char)
 ::N::
 {
     MakeAccent "{U+00D1}"
+}
+
+#HotIf (Trigger = 9) ; breve
+
+::a::
+{
+    MakeAccent "{U+0103}"
+}
+::e::
+{
+    MakeAccent "{U+0115}"
+}
+::g::
+{
+    MakeAccent "{U+011F}"
+}
+::i::
+{
+    MakeAccent "{U+012D}"
+}
+::o::
+{
+    MakeAccent "{U+014F}"
+}
+::u::
+{
+    MakeAccent "{U+016D}"
+}
+::A::
+{
+    MakeAccent "{U+0102}"
+}
+::E::
+{
+    MakeAccent "{U+0114}"
+}
+::G::
+{
+    MakeAccent "{U+011E}"
+}
+::I::
+{
+    MakeAccent "{U+012C}"
+}
+::O::
+{
+    MakeAccent "{U+014E}"
+}
+::U::
+{
+    MakeAccent "{U+016C}"
 }
