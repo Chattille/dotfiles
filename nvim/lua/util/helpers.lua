@@ -1,11 +1,12 @@
 local M = {}
 
 ---Set icons for diagnostic symbols.
-function M.set_diagnostic_icons()
+function M.configure_diagnostics()
     local icons = require('util.icons').diagnostics
     local severity = vim.diagnostic.severity
 
     vim.diagnostic.config {
+        float = { border = 'rounded' },
         severity_sort = true,
         signs = {
             text = {

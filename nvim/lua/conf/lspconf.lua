@@ -1,8 +1,8 @@
 -- }}} UI {{{
 
--- diagnostic icons
+-- diagnostics ui
 local helpers = require 'util.helpers'
-helpers.set_diagnostic_icons()
+helpers.configure_diagnostics()
 
 -- hover window
 vim.lsp.handlers['textDocument/hover'] =
