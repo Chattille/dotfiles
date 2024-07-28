@@ -8,7 +8,7 @@ map('c', '<C-j>', '<S-Left>')
 map('c', '<C-k>', '<S-Right>')
 
 -- comment
-map('n', 'gcu', 'gcgc', { remap = true })
+map('o', 'u', 'gc', { remap = true })
 
 -- windows and buffers
 map('n', ';', '<C-w>')
