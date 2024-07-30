@@ -27,6 +27,7 @@ alias nvcf="nvim $HOME/.config/nvim/init.lua"
 alias rezsh='exec zsh'
 alias zcf="nvim $HOME/.zshrc"
 alias vv="unalias vv && . $CUSTOM_SCRIPTS/env/vv"
+alias vip='vv on ipy && ipython && deactivate'
 alias rm='trash'
 alias rl='trash-list'
 alias rt='trash-empty'
