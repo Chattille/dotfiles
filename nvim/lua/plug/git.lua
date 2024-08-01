@@ -25,6 +25,8 @@ return {
             map(']g', function()
                 gs.nav_hunk 'next'
             end, 'Git go to next hunk')
+
+            vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#89b4fa' })
         end,
     },
     event = 'VeryLazy',
