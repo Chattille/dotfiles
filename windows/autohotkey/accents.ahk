@@ -2,7 +2,13 @@
 
 #NoTrayIcon
 
-Contexts := ["brave.exe", "GoldenDict.exe", "WeChat.exe", "WindowsTerminal.exe"]
+Contexts := [
+    "brave.exe",
+    "GoldenDict.exe",
+    "WeChat.exe",
+    "WindowsTerminal.exe",
+    "WINWORD.EXE",
+]
 NeedsAccents()
 {
     for win in Contexts
