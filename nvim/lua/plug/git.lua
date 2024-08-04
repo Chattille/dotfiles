@@ -27,6 +27,7 @@ return {
             end, 'Git go to next hunk')
 
             vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#89b4fa' })
+            vim.api.nvim_set_hl(0, 'GitSignsStagedChange', { fg = '#3c5f9f' })
         end,
     },
     event = 'VeryLazy',
