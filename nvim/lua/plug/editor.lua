@@ -1,10 +1,10 @@
 return {
     -- autopair
     {
-        'windwp/nvim-autopairs',
-        event = 'InsertEnter',
+        'Chattille/pairs.nvim',
+        event = { 'CmdlineEnter', 'InsertEnter' },
         config = function()
-            require 'conf.autopair'
+            require 'conf.pairs'
         end,
     },
 
