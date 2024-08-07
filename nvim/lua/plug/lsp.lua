@@ -109,7 +109,7 @@ return {
     {
         'nvimtools/none-ls.nvim',
         config = function()
-            require 'conf.none_ls'
+            require 'conf.none-ls'
         end,
         cmd = { 'NullLsLog', 'NullLsInfo' },
         ft = {
