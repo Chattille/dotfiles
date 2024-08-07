@@ -55,3 +55,17 @@
   (info_string
     (language) @label
     (#devicon! @label)))
+
+; tables
+(pipe_table_header
+  "|" @punctuation.special
+  (#set! @punctuation.special conceal "│"))
+(pipe_table_delimiter_row
+  "|" @punctuation.special
+  (#set! @punctuation.special conceal "│"))
+(pipe_table_delimiter_cell
+  "-" @punctuation.special
+  (#set! @punctuation.special conceal "═"))
+(pipe_table_row
+  "|" @punctuation.special
+  (#set! @punctuation.special conceal "│"))
