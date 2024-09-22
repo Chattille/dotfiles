@@ -162,7 +162,7 @@ local servers = {
     'jsonls',
     'lua_ls',
     'pyright',
-    'tsserver',
+    'ts_ls',
     'volar',
 }
 
@@ -187,7 +187,7 @@ local enhanced_opts = {
         opts.settings = { Lua = { format = { enable = false } } }
         opts.on_attach = no_formatter_on_attach
     end,
-    ['tsserver'] = function(opts)
+    ['ts_ls'] = function(opts)
         -- disable default formatter; preferring prettierd
         opts.on_attach = no_formatter_on_attach
 
