@@ -35,6 +35,9 @@ Trigger := 0
 !n::global Trigger := 8 ; tilde
 !b::global Trigger := 9 ; breve
 
+!-::Send "–"
+!+-::Send "—"
+
 MakeAccent(Char)
 {
     Send Char
@@ -233,6 +236,10 @@ MakeAccent(Char)
 {
     MakeAccent "{U+01D2}"
 }
+::s::
+{
+    MakeAccent "{U+0161}"
+}
 ::u::
 {
     MakeAccent "{U+01D4}"
@@ -252,6 +259,10 @@ MakeAccent(Char)
 ::O::
 {
     MakeAccent "{U+01D1}"
+}
+::S::
+{
+    MakeAccent "{U+0160}"
 }
 ::U::
 {
