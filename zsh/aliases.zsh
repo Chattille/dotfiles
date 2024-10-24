@@ -19,7 +19,6 @@ alias la='ls -A'
 alias ll='ls -Alh'
 alias tree='command tree -C'
 alias c='clear -x'
-alias du='command du -bsh'
 alias oalias="nvim $HOME/.zim/aliases.zsh"
 
 # Utilities
@@ -45,9 +44,13 @@ alias gmm='git commit -m'
 alias gs='git status'
 
 # Functions
+du() {
+    command du -bsh "${1:-$PWD}" | cut -f 1
+}
+
 ldu() {
-    local tgt=${1:-$PWD}
-    command du -bahd 1 $tgt | sort -h
+    local target="${${1:-.}%/}"
+    command du -bahd 0 "$target"/* | sort -h
 }
 
 dk() {
