@@ -31,11 +31,10 @@ Trigger := 0
 !u::global Trigger := 4 ; trema
 !;::global Trigger := 5 ; caron
 !i::global Trigger := 6 ; circumflex
-!n::global Trigger := 7 ; tilde
-!b::global Trigger := 8 ; breve
+!,::global Trigger := 7 ; cedilla
+!n::global Trigger := 8 ; tilde
+!b::global Trigger := 9 ; breve
 
-!c::Send "{U+00E7}"     ; c cedilla
-!+c::Send "{U+00C7}"    ; C cedilla
 !'::Send "{U+00E6}"     ; ligature ae
 !+'::Send "{U+00C6}"    ; ligature AE
 !q::Send "{U+0153}"     ; ligature oe
@@ -319,7 +318,18 @@ MakeAccent(Char)
     MakeAccent "{U+00DB}"
 }
 
-#HotIf (Trigger = 7) ; tilde
+#HotIf (Trigger = 7) ; cedilla
+
+::c::
+{
+    MakeAccent "{U+00E7}"
+}
+::C::
+{
+    MakeAccent "{U+00C7}"
+}
+
+#HotIf (Trigger = 8) ; tilde
 
 ::n::
 {
@@ -330,7 +340,7 @@ MakeAccent(Char)
     MakeAccent "{U+00D1}"
 }
 
-#HotIf (Trigger = 8) ; breve
+#HotIf (Trigger = 9) ; breve
 
 ::a::
 {
