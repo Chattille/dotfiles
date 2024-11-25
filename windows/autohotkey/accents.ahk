@@ -6,6 +6,7 @@ Contexts := [
     "brave.exe",
     "GoldenDict.exe",
     "MarkText.exe",
+    "POWERPNT.EXE",
     "WeChat.exe",
     "WindowsTerminal.exe",
     "WINWORD.EXE",
