@@ -4,7 +4,7 @@
 # Auxiliaries
 #
 print_info() {
-    echo "\e[33m${1}\e[0m"
+    echo "\e[33m o ${1}\e[0m"
 }
 print_title() {
     echo "\e[34;1m===> ${1}\e[0m"
@@ -16,7 +16,7 @@ has_command() {
     fi
 }
 
-parent=$(dirname $0)
+parent=$(dirname "$(realpath $0)")
 print_info "Dotfile directory: $parent"
 
 print_info 'Updating and upgrading APT'
@@ -42,8 +42,8 @@ fi
 print_info "Installing 'zsh/.zshrc' to '$HOME/.zshrc'"
 ln -s "$parent/zsh/.zshrc" "$HOME/.zshrc"
 
-print_info "Installing 'zsh/aliases.zsh' to '$HOME/.zim/aliases.zsh'"
-ln -s "$parent/zsh/aliases.zsh" "$HOME/.zim/aliases.zsh"
+# print_info "Installing 'zsh/aliases.zsh' to '$HOME/.zim/aliases.zsh'"
+# ln -s "$parent/zsh/aliases.zsh" "$HOME/.zim/aliases.zsh"
 
 #
 # 2. Zim
@@ -68,6 +68,21 @@ then
     print_info 'Decompressing NeoVim'
     tar xzvf "$parent/nvim.tar.gz"
     command rm -rf "$parent/nvim.tar.gz"
+
+    print_info "Installing NeoVim to '$HOME/.local/nvim'"
+    if [ ! -e "$HOME/.local" ]
+    then
+        mkdir "$HOME/.local"
+    fi
+    mv -P "$parent/nvim-linux64" "$HOME/.local/nvim"
+
+    print_info 'Configuring NeoVim'
+    if [ ! -e "$HOME/.local/bin" ]
+    then
+        mkdir "$HOME/.local/bin"
+    fi
+    ln -s "$HOME/.local/nvim/bin/nvim" "$HOME/.local/bin/nvim"
+    ln -s "$HOME/.local/nvim/bin/nvim" "$HOME/.local/bin/nv"
 fi
 
 print_info "Installing 'nvim/' to '$HOME/.config/nvim'"
@@ -95,4 +110,8 @@ ln -s "$parent/git/.gitconfig" "$HOME/.gitconfig"
 print_title 'Configuring Docker'
 
 print_info "Installing 'docker/config.json' to '$HOME/.docker/config.json'"
+if [ ! -e "$HOME/.docker" ]
+then
+    mkdir "$HOME/.docker"
+fi
 ln -s "$parent/docker/config.json" "$HOME/.docker/config.json"
