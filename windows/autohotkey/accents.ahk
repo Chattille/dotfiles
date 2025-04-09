@@ -61,6 +61,10 @@ MakeAccent(Char)
 {
     MakeAccent "{U+00E1}"
 }
+::c::
+{
+    MakeAccent "{U+0107}"
+}
 ::e::
 {
     MakeAccent "{U+00E9}"
@@ -80,6 +84,10 @@ MakeAccent(Char)
 ::A::
 {
     MakeAccent "{U+00C1}"
+}
+::C::
+{
+    MakeAccent "{U+0106}"
 }
 ::E::
 {
