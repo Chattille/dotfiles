@@ -4,10 +4,6 @@
 local helpers = require 'util.helpers'
 helpers.configure_diagnostics()
 
--- hover window
-vim.lsp.handlers['textDocument/hover'] =
-    vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-
 -- :LspInfo window
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
@@ -78,7 +74,9 @@ local mappings = {
     },
     hover = {
         lhs = '<Leader>jk',
-        rhs = vim.lsp.buf.hover,
+        rhs = function()
+            vim.lsp.buf.hover { border = 'rounded' }
+        end,
         desc = 'Display hover information',
     },
     references = {
