@@ -3,7 +3,9 @@
 #NoTrayIcon
 
 Contexts := [
+    "anki.exe",
     "brave.exe",
+    "EXCEL.EXE",
     "GoldenDict.exe",
     "POWERPNT.EXE",
     "Typora.exe",
