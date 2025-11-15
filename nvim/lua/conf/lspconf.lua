@@ -4,9 +4,6 @@
 local helpers = require 'util.helpers'
 helpers.configure_diagnostics()
 
--- :LspInfo window
-require('lspconfig.ui.windows').default_options.border = 'rounded'
-
 -- }}} Initialization {{{
 
 local disable_defaults =
@@ -161,7 +158,7 @@ local servers = {
     'lua_ls',
     'pyright',
     'ts_ls',
-    'volar',
+    'vue_ls',
 }
 
 local enhanced_opts = {
@@ -217,5 +214,6 @@ for _, server in ipairs(servers) do
         enhanced_opts[server](opts)
     end
 
-    lspconfig[server].setup(opts)
+    vim.lsp.config(server, opts)
+    vim.lsp.enable(server)
 end
