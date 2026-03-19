@@ -63,24 +63,18 @@ has_command 'nvim'
 if [ $? -eq 1 ]
 then
     print_info 'Downloading NeoVim'
-    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz > "$parent/nvim.tar.gz"
+    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz > "$parent/nvim.tar.gz"
 
     print_info 'Decompressing NeoVim'
     tar xzvf "$parent/nvim.tar.gz"
     command rm -rf "$parent/nvim.tar.gz"
 
     print_info "Installing NeoVim to '$HOME/.local/nvim'"
-    if [ ! -e "$HOME/.local" ]
-    then
-        mkdir "$HOME/.local"
-    fi
+    mkdir -p "$HOME/.local"
     mv -P "$parent/nvim-linux64" "$HOME/.local/nvim"
 
     print_info 'Configuring NeoVim'
-    if [ ! -e "$HOME/.local/bin" ]
-    then
-        mkdir "$HOME/.local/bin"
-    fi
+    mkdir -p "$HOME/.local/bin"
     ln -s "$HOME/.local/nvim/bin/nvim" "$HOME/.local/bin/nvim"
     ln -s "$HOME/.local/nvim/bin/nvim" "$HOME/.local/bin/nv"
 fi
@@ -110,8 +104,5 @@ ln -s "$parent/git/.gitconfig" "$HOME/.gitconfig"
 print_title 'Configuring Docker'
 
 print_info "Installing 'docker/config.json' to '$HOME/.docker/config.json'"
-if [ ! -e "$HOME/.docker" ]
-then
-    mkdir "$HOME/.docker"
-fi
+mkdir -p "$HOME/.docker"
 ln -s "$parent/docker/config.json" "$HOME/.docker/config.json"
