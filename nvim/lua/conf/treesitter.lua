@@ -4,6 +4,7 @@ local enabled_fts = {
     'c',
     'lua',
     'python',
+    'query',
     'vim',
     'vimdoc',
     'zsh',
@@ -43,8 +44,8 @@ local function lua_match_clip(mat, _, bufnr, pred, meta)
     end
 end
 
----(#conceal-pairs! @capture "text-1" "conceal-1" ...)
----Conceal text-n with conceal-n for the capture group if matched.
+---`(#conceal-pairs! @capture "pat-1" "conceal-1" ...)`
+---Conceal `pat-n` with `conceal-n` for the capture group if matched.
 local function conceal_pairs(mat, _, bufnr, pred, meta)
     local id = pred[2]
 
@@ -52,6 +53,7 @@ local function conceal_pairs(mat, _, bufnr, pred, meta)
         local text = vim.treesitter.get_node_text(node, bufnr)
 
         for i = 3, #pred, 2 do
+            -- `pattern` to be concealed with `conceal`
             local pattern = pred[i]
             local conceal = pred[i + 1]
 

@@ -24,7 +24,7 @@
    "\\div" "÷"
    "\\times" "×"))
 
-; greek letters
+; Greek letters
 (generic_command
   command: (command_name) @text
   (#any-of? @text
@@ -80,7 +80,7 @@
    "\\omega"   "ω"      "\\Omega"   "Ω"
    ))
 
-; super-/subscripts; only for one-digit scripts
+; superscripts/subscripts; only for one-digit scripts
 (superscript
   "^" @conceal
   superscript: (letter) @text
@@ -99,3 +99,9 @@
    "4" "₄"    "5" "₅"    "6" "₆"
    "7" "₇"    "8" "₈"    "9" "₉"    "0" "₀")
   (#set! @conceal conceal ""))
+
+; equation delimiters
+(displayed_equation . "$$" @conceal
+  (#set! conceal_lines ""))
+(displayed_equation "$$" @conceal .
+  (#set! conceal_lines ""))
