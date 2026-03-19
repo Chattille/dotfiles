@@ -1,3 +1,21 @@
+-- }}} Activation {{{
+
+local enabled_fts = {
+    'c',
+    'lua',
+    'python',
+    'vim',
+    'vimdoc',
+    'zsh',
+}
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = enabled_fts,
+    callback = function ()
+        vim.treesitter.start()
+    end
+})
+
+
 -- }}} Directives {{{
 
 local add_directive = vim.treesitter.query.add_directive
