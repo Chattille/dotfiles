@@ -12,30 +12,52 @@ return {
     {
         'kylechui/nvim-surround',
         version = '*',
-        opts = {
-            move_cursor = false,
-            keymaps = {
-                -- lowercase: on same line; uppercase: on new lines
-                -- a/d/r: for text objects; l: for current line
-                normal = ',a',
-                normal_cur = ',l',
-                normal_line = ',A',
-                normal_cur_line = ',L',
-                visual = ',a',
-                visual_line = ',A',
-                delete = ',d',
-                change = ',r',
-                change_line = ',R',
-            },
-        },
+        init = function()
+            vim.g.nvim_surround_no_mappings = true
+        end,
+        opts = { move_cursor = false },
         keys = {
-            { ',a', mode = { 'n', 'x' }, desc = 'Add pairs' },
-            { ',l', desc = 'Add pairs for current line' },
-            { ',A', mode = { 'n', 'x' }, desc = 'Add pairs on new lines' },
-            { ',L', desc = 'Add pairs for current line on new lines' },
-            { ',d', desc = 'Delete pairs' },
-            { ',r', desc = 'Replace pairs' },
-            { ',R', desc = 'Replace pairs on new lines' },
+            -- lowercase: on same line; uppercase: on new lines
+            -- a/d/r: for text objects; l: for current line
+            {
+                ',a',
+                '<Plug>(nvim-surround-normal)',
+                desc = 'Add pairs',
+            },
+            {
+                ',a',
+                '<Plug>(nvim-surround-visual)',
+                mode = 'x',
+                desc = 'Add pairs (visual)',
+            },
+            {
+                ',l',
+                '<Plug>(nvim-surround-normal-cur)',
+                desc = 'Add pairs for current line',
+            },
+            {
+                ',A',
+                '<Plug>(nvim-surround-normal-line)',
+                desc = 'Add pairs on new lines',
+            },
+            {
+                ',A',
+                '<Plug>(nvim-surround-visual-line)',
+                mode = 'x',
+                desc = 'Add pairs on new lines (visual)',
+            },
+            {
+                ',L',
+                '<Plug>(nvim-surround-normal-cur-line)',
+                desc = 'Add pairs for current line on new lines',
+            },
+            { ',d', '<Plug>(nvim-surround-delete)', desc = 'Delete pairs' },
+            { ',r', '<Plug>(nvim-surround-change)', desc = 'Replace pairs' },
+            {
+                ',R',
+                '<Plug>(nvim-surround-change-line)',
+                desc = 'Replace pairs on new lines',
+            },
         },
     },
 
