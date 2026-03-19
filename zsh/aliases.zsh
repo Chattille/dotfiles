@@ -59,8 +59,8 @@ dk() {
     case $cmd {
         cd) shift; command docker compose down "$@";;
         cu) shift; command docker compose up --detach "$@";;
-        ia) shift; command docker images --all "$@";;
-        is) shift; command docker images "$@";;
+        ia) shift; command docker images --all --format "table" "$@";;
+        is) shift; command docker images --format "table" "$@";;
         ns) shift; command docker network ls "$@";;
         pa) shift; command docker container ls --all "$@";;
         vs) shift; command docker volume ls "$@";;
