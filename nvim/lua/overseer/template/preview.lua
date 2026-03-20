@@ -1,12 +1,3 @@
-local enabled_fts = {
-    'css',
-    'html',
-    'javascript',
-    'less',
-    'scss',
-    'typescript',
-}
-
 ---Generate live preview builder.
 ---@param cwd string Working directory.
 ---@return function # Builder function.
@@ -33,9 +24,14 @@ end
 
 return {
     condition = {
-        callback = function(opts)
-            return vim.list_contains(enabled_fts, opts.filetype)
-        end,
+        filetype = {
+            'css',
+            'html',
+            'javascript',
+            'less',
+            'scss',
+            'typescript',
+        },
     },
     generator = function(opts, callback)
         local root = vim.fs.root(opts.dir, { 'package.json', 'index.html' })

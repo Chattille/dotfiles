@@ -29,8 +29,7 @@ return {
     generator = function(_, callback)
         local root = get_cmake_root()
         if not root then
-            vim.notify('Root directory not found.', vim.log.levels.ERROR)
-            return
+            callback '[Template cmake] Root directory not found'
         end
         local build = root .. '/build'
 

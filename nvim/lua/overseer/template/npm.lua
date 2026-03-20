@@ -18,15 +18,13 @@ return {
     generator = function(_, callback)
         local root = get_npm_root()
         if not root then
-            vim.notify('Root directory not found.', vim.log.levels.ERROR)
-            return
+            callback '[Template npm] Root directory not found'
         end
 
         -- read package.json
         local json = fs.load_json_file(root .. '/package.json')
         if not json.scripts or vim.tbl_isempty(json.scripts) then
-            callback {}
-            return
+            callback '[Template npm] No custom scripts'
         end
 
         -- add custom scripts defined in package.json

@@ -1,11 +1,3 @@
-local enabled_fts = {
-    'bash',
-    'javascript',
-    'lua',
-    'python',
-    'sh',
-    'zsh',
-}
 local cmdmap = {
     bash = 'bash',
     javascript = 'node',
@@ -17,9 +9,14 @@ local cmdmap = {
 
 return {
     condition = {
-        callback = function(opts)
-            return vim.list_contains(enabled_fts, opts.filetype)
-        end,
+        filetype = {
+            'bash',
+            'javascript',
+            'lua',
+            'python',
+            'sh',
+            'zsh',
+        },
     },
     generator = function(opts, callback)
         local fpath = vim.api.nvim_buf_get_name(0)

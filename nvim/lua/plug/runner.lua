@@ -21,29 +21,28 @@ return {
     {
         'stevearc/overseer.nvim',
         opts = {
-            strategy = {
-                'toggleterm',
-                direction = 'horizontal',
+            component_aliases = {
+                default = {
+                    'on_exit_set_status',
+                    'toggleterm',
+                    {
+                        'on_complete_dispose',
+                        require_view = { 'SUCCESS', 'FAILURE' },
+                    },
+                },
             },
+            form = { border = 'rounded' },
             task_list = {
                 direction = 'left',
                 min_width = 0.3,
                 bindings = { ['<Space>'] = 'RunAction' },
             },
-            templates = { 'runners' },
         },
         cmd = {
-            'OverseerBuild',
-            'OverseerClearCache',
             'OverseerClose',
-            'OverseerDeleteBundle',
-            'OverseerInfo',
-            'OverseerLoadBundle',
             'OverseerOpen',
-            'OverseerQuickAction',
             'OverseerRun',
-            'OverseerRunCmd',
-            'OverseerSaveBundle',
+            'OverseerShell',
             'OverseerTaskAction',
             'OverseerToggle',
         },
@@ -52,7 +51,7 @@ return {
                 '<Leader>r',
                 function()
                     vim.cmd 'silent update'
-                    require('overseer').run_template { tags = { 'DEFAULT' } }
+                    require('overseer').run_task { tags = { 'DEFAULT' } }
                 end,
                 desc = 'Run default task',
             },
@@ -60,7 +59,7 @@ return {
                 '<Leader>R',
                 function()
                     vim.cmd 'silent update'
-                    require('overseer').run_template()
+                    require('overseer').run_task()
                 end,
                 desc = 'Choose task and run',
             },
