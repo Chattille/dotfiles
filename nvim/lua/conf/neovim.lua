@@ -1,6 +1,3 @@
-vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#89b4fa', bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'FloatTitle', { fg = '#a6adc8', bg = 'NONE' })
-
 local map = vim.keymap.set
 
 -- cmdline motion
