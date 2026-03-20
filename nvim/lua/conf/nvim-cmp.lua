@@ -8,7 +8,7 @@ cmp.setup {
             luasnip.lsp_expand(args.body)
         end,
     },
-    window = { documentation = cmp.config.window.bordered() },
+    window = { documentation = { border = 'rounded' } },
     formatting = {
         format = function(_, vim_item)
             vim_item.kind =
