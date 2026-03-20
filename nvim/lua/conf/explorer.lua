@@ -23,18 +23,20 @@ require('nvim-tree').setup {
 
         api.config.mappings.default_on_attach(bufnr)
 
-        bufdel 'o'
-        bufdel '<CR>'
-        bufdel ']c'
-        bufdel '[c'
         bufdel 'd'
         bufdel 'D'
+        bufdel 'o'
+        bufdel ']c'
+        bufdel '[c'
+        bufdel '<CR>'
+        bufdel '<C-k>'
 
-        bufmap('<Space>', api.node.open.edit, 'Open')
-        bufmap(']g', api.node.navigate.git.next, 'Next Git')
-        bufmap('[g', api.node.navigate.git.prev, 'Prev Git')
         bufmap('d', api.fs.trash, 'Trash')
         bufmap('D', api.fs.remove, 'Delete')
+        bufmap(']g', api.node.navigate.git.next, 'Next Git')
+        bufmap('[g', api.node.navigate.git.prev, 'Prev Git')
+        bufmap('<Space>', api.node.open.edit, 'Open')
+        bufmap('<C-g>', api.node.show_info_popup, 'Info')
     end,
     view = {
         width = 25,
