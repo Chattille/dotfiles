@@ -1,16 +1,4 @@
 local nonels = require 'null-ls'
-local masonpath = vim.fn.expand '~/.local/share/nvim/mason'
-
----Launch blackd in the background.
-local function launch_blackd()
-    local id = vim.fn.jobstart(masonpath .. '/packages/black/venv/bin/blackd')
-    if id == 0 then
-        vim.notify('invalid arguments', vim.log.levels.ERROR)
-    end
-    if id == -1 then
-        vim.notify('blackd not executable', vim.log.levels.ERROR)
-    end
-end
 
 nonels.setup {
     border = 'rounded',
@@ -27,11 +15,6 @@ nonels.setup {
                 desc = 'Format current buffer (none-ls)',
                 buffer = bufnr,
             })
-        end
-
-        -- pre-tasks
-        if vim.bo.filetype == 'python' then
-            launch_blackd()
         end
     end,
     sources = {
@@ -60,8 +43,8 @@ nonels.setup {
 
         -- python
         nonels.builtins.formatting.isort,
-        nonels.builtins.formatting.blackd.with {
-            config = { line_length = 79 },
+        nonels.builtins.formatting.black.with {
+            extra_args = { '--line-length', '80' },
         },
     },
 }
