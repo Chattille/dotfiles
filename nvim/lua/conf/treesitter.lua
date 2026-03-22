@@ -2,20 +2,24 @@
 
 local enabled_fts = {
     'c',
+    'html',
+    'json',
+    'jsonc',
     'lua',
     'python',
+    'typescript',
     'query',
     'vim',
     'vimdoc',
+    'vue',
     'zsh',
 }
 vim.api.nvim_create_autocmd('FileType', {
     pattern = enabled_fts,
-    callback = function ()
+    callback = function()
         vim.treesitter.start()
-    end
+    end,
 })
-
 
 -- }}} Directives {{{
 
