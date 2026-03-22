@@ -31,6 +31,7 @@ alias rm='trash'
 alias rl='trash-list'
 alias rt='trash-empty'
 alias rs='trash-restore'
+alias nr='npm run'
 
 # Git
 alias g='git'
