@@ -15,7 +15,7 @@ const mouseEnter = new MouseEvent('mouseenter', eventOptions);
 const mouseOut = new MouseEvent('mouseout', eventOptions);
 const mouseLeave = new MouseEvent('mouseleave', eventOptions);
 
-const CLOSE_REGEX = /\bclose\b|关闭|關閉|x|×/i;
+const CLOSE_REGEX = /\bclose\b|关闭|關閉|✕|×/i;
 
 // }}} Keymaps {{{
 
