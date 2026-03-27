@@ -116,6 +116,7 @@ iunmap('<Alt-d>');
 // }}} Settings {{{
 
 // ----- cosmetic -----
+settings.verticalTabs = false;
 settings.theme = `
 .sk_theme {
   background: #1e1e2eff;
