@@ -52,14 +52,14 @@ map('F', 'C'); // open quietly
 unmap('C');
 mapkey('<Ctrl-h>', 'Mouse over/enter element', function () {
     Hints.create('', function (element) {
-        element.dispatchEvent(mouseOver);
-        element.dispatchEvent(mouseEnter);
+        element.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+        element.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
     });
 });
 mapkey('<Ctrl-j>', 'Mouse out/leave element', function () {
     Hints.create('', function (element) {
-        element.dispatchEvent(mouseOut);
-        element.dispatchEvent(mouseLeave);
+        element.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
+        element.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
     });
 });
 
