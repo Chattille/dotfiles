@@ -16,6 +16,7 @@ const mouseOut = new MouseEvent('mouseout', eventOptions);
 const mouseLeave = new MouseEvent('mouseleave', eventOptions);
 
 const CLOSE_REGEX = /\bclose\b|关闭|關閉|✕|×/i;
+const LEADER = '\\';
 
 // }}} Keymaps {{{
 
@@ -50,30 +51,38 @@ unmap('T');
 // ----- links -----
 map('F', 'C'); // open quietly
 unmap('C');
-mapkey('<Ctrl-h>', 'Mouse over/enter element', function () {
+
+// ----- passthrough -----
+map('<Ctrl-p>', 'p');
+unmap('p');
+
+// ----- mouse actions -----
+map(`${LEADER}q`, 'q'); // pictures and buttons
+unmap('q');
+mapkey(`${LEADER}x`, 'Click close button', function () {
+    const elems = getClickableElements('[rel=close]', CLOSE_REGEX);
+    if (!elems.length) return;
+    Hints.click(elems);
+});
+mapkey(`${LEADER}h`, 'Mouse over/enter an element', function () {
     Hints.create('', function (element) {
         element.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
         element.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
     });
 });
-mapkey('<Ctrl-j>', 'Mouse out/leave element', function () {
+unmap('<Ctrl-h>');
+mapkey(`${LEADER}j`, 'Mouse out/leave an element', function () {
     Hints.create('', function (element) {
         element.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
         element.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
     });
 });
-
-// ----- passthrough -----
-map('<Ctrl-p>', 'p');
-
-// ----- mouse clicks -----
-map('p', 'q'); // pictures and buttons
-unmap('q');
-mapkey('<Ctrl-x>', 'Click close button', function () {
-    const elems = getClickableElements('[rel=close]', CLOSE_REGEX);
-    if (!elems.length) return false;
-    Hints.click(elems);
-    return true;
+unmap('<Ctrl-j>');
+mapkey(`${LEADER}v`, 'Play/pause video', function () {
+    Hints.create('video', function (element) {
+        if (element.paused) element.play();
+        else element.pause();
+    });
 });
 
 // ----- omnibar -----
