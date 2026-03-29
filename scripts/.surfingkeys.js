@@ -123,9 +123,9 @@ iunmap('<Alt-w>');
 iunmap('<Alt-d>');
 
 // }}} Settings {{{
-
-// ----- cosmetic -----
+settings.modeAfterYank = 'Normal';
 settings.verticalTabs = false;
+settings.hintAlign = 'left';
 settings.theme = `
 .sk_theme {
   background: #1e1e2eff;
