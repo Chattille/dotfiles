@@ -64,14 +64,14 @@ mapkey(`${LEADER}x`, 'Click close button', function () {
     if (!elems.length) return;
     Hints.click(elems);
 });
-mapkey(`${LEADER}h`, 'Mouse over/enter an element', function () {
+mapkey(`${LEADER}j`, 'Mouse over/enter an element', function () {
     Hints.create('', function (element) {
         element.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
         element.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
     });
 });
 unmap('<Ctrl-h>');
-mapkey(`${LEADER}j`, 'Mouse out/leave an element', function () {
+mapkey(`${LEADER}k`, 'Mouse out/leave an element', function () {
     Hints.create('', function (element) {
         element.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
         element.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
