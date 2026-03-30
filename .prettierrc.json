@@ -1,6 +1,7 @@
 {
     "$schema": "https://json.schemastore.org/prettierrc",
+    "experimentalOperatorPosition": "start",
     "printWidth": 79,
-    "tabWidth": 4,
-    "singleQuote": true
+    "singleQuote": true,
+    "tabWidth": 4
 }
