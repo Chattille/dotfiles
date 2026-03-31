@@ -4,7 +4,6 @@ import theme from './theme';
 const {
     Hints,
     addSearchAlias,
-    getClickableElements,
     imap,
     iunmap,
     map,
@@ -121,10 +120,12 @@ imap('<Ctrl-h>', '<Alt-b>'); // move one word backward
 imap('<Ctrl-l>', '<Alt-f>'); // move one word forward
 imap('<Ctrl-w>', '<Alt-w>'); // delete one word backward
 imap('<Ctrl-d>', '<Alt-d>'); // delete one word forward
+imap('<Ctrl-b>', '<Ctrl-f>'); // move to line start
 iunmap('<Alt-b>');
 iunmap('<Alt-f>');
 iunmap('<Alt-w>');
 iunmap('<Alt-d>');
+iunmap('<Ctrl-f>');
 
 // }}} Settings {{{
 settings.modeAfterYank = 'Normal';
