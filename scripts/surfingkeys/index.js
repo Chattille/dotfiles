@@ -57,33 +57,33 @@ unmap('p');
 // ----- mouse actions -----
 map(`${LEADER}q`, 'q'); // pictures and buttons
 unmap('q');
-mapkey(`${LEADER}x`, 'Click close button', function () {
+mapkey(`${LEADER}x`, 'Click close button', () => {
     const elems = utils.getClickableElements('[rel=close]', CLOSE_REGEX, {
         ['aria-label']: CLOSE_REGEX,
         title: CLOSE_REGEX,
     });
     if (!elems.length) return;
 
-    Hints.create(elems, function (element) {
+    Hints.create(elems, (element) => {
         element.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 });
-mapkey(`${LEADER}j`, 'Mouse over/enter an element', function () {
-    Hints.create('', function (element) {
+mapkey(`${LEADER}j`, 'Mouse over/enter an element', () => {
+    Hints.create('', (element) => {
         element.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
         element.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
     });
 });
 unmap('<Ctrl-h>');
-mapkey(`${LEADER}k`, 'Mouse out/leave an element', function () {
-    Hints.create('', function (element) {
+mapkey(`${LEADER}k`, 'Mouse out/leave an element', () => {
+    Hints.create('', (element) => {
         element.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
         element.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
     });
 });
 unmap('<Ctrl-j>');
-mapkey(`${LEADER}v`, 'Play/pause video', function () {
-    Hints.create('video', function (element) {
+mapkey(`${LEADER}v`, 'Play/pause video', () => {
+    Hints.create('video', (element) => {
         if (element.paused) element.play();
         else element.pause();
     });
