@@ -1,3 +1,30 @@
+const LEADER = '\\';
+const CLOSE_REGEX = /\bclose\b|关闭|關閉|✕|×/i;
+
+/**
+ * Throw an error with `msg`.
+ * @param {string} msg Error message.
+ */
+function raise(msg) {
+    throw new Error(`[Surfingkeys] ${msg}`);
+}
+
+/**
+ * Return the <Leader> key.
+ * @return {string}
+ */
+function getLeaderKey() {
+    return LEADER;
+}
+
+/**
+ * Return regex for close buttons.
+ * @return {RegExp}
+ */
+function getCloseRegex() {
+    return CLOSE_REGEX;
+}
+
 /**
  * @param {Element} elem
  */
@@ -102,4 +129,4 @@ function getClickableElements(selector, text, pats) {
     });
 }
 
-export default { getClickableElements };
+export { getClickableElements, getLeaderKey, getCloseRegex, raise };

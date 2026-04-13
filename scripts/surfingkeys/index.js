@@ -1,5 +1,9 @@
-import utils from './utils';
 import theme from './theme';
+import { getClickableElements, getLeaderKey, getCloseRegex } from './utils';
+import { setupSites } from './sites';
+
+const CLOSE_REGEX = getCloseRegex();
+const LEADER = getLeaderKey();
 
 const {
     Hints,
@@ -12,10 +16,10 @@ const {
     unmap,
 } = api;
 
-const CLOSE_REGEX = /\bclose\b|关闭|關閉|✕|×/i;
-const LEADER = '\\';
-
 // }}} Keymaps {{{
+
+// ----- site-specific -----
+setupSites();
 
 // ----- general -----
 map('<Ctrl-[>', '<Esc>');
@@ -57,7 +61,7 @@ unmap('p');
 map(`${LEADER}q`, 'q'); // pictures and buttons
 unmap('q');
 mapkey(`${LEADER}x`, 'Click close button', () => {
-    const elems = utils.getClickableElements('[rel=close]', CLOSE_REGEX, {
+    const elems = getClickableElements('[rel=close]', CLOSE_REGEX, {
         ['aria-label']: CLOSE_REGEX,
         title: CLOSE_REGEX,
     });
