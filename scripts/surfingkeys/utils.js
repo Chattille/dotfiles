@@ -78,6 +78,32 @@ function matchesPattern(elem, pats) {
 }
 
 /**
+ * Click the element.
+ * @param {Element} elem
+ */
+function click(elem) {
+    elem.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+}
+
+/**
+ * Hover over the element.
+ * @param {Element} elem
+ */
+function hover(elem) {
+    elem.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+    elem.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+}
+
+/**
+ * Move the cursor away from the element.
+ * @param {Element} elem
+ */
+function unhover(elem) {
+    elem.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
+    elem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+}
+
+/**
  * @callback ElementFilter
  * @param {Element} elem
  * @returns {boolean}
@@ -129,4 +155,12 @@ function getClickableElements(selector, text, pats) {
     });
 }
 
-export { getClickableElements, getLeaderKey, getCloseRegex, raise };
+export {
+    click,
+    getClickableElements,
+    getLeaderKey,
+    getCloseRegex,
+    hover,
+    raise,
+    unhover,
+};

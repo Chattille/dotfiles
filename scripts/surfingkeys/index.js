@@ -1,6 +1,14 @@
 import theme from './theme';
-import { getClickableElements, getLeaderKey, getCloseRegex } from './utils';
+
 import { setupSites } from './sites';
+import {
+    click,
+    getClickableElements,
+    getLeaderKey,
+    getCloseRegex,
+    hover,
+    unhover,
+} from './utils';
 
 const CLOSE_REGEX = getCloseRegex();
 const LEADER = getLeaderKey();
@@ -67,22 +75,14 @@ mapkey(`${LEADER}x`, 'Click close button', () => {
     });
     if (!elems.length) return;
 
-    Hints.create(elems, (element) => {
-        element.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    });
+    Hints.create(elems, (element) => click(element));
 });
 mapkey(`${LEADER}j`, 'Mouse over/enter an element', () => {
-    Hints.create('', (element) => {
-        element.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-        element.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
-    });
+    Hints.create('', (element) => hover(element));
 });
 unmap('<Ctrl-h>');
 mapkey(`${LEADER}k`, 'Mouse out/leave an element', () => {
-    Hints.create('', (element) => {
-        element.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
-        element.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
-    });
+    Hints.create('', (element) => unhover(element));
 });
 unmap('<Ctrl-j>');
 mapkey(`${LEADER}v`, 'Play/pause video', () => {

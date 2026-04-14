@@ -1,5 +1,5 @@
 const { mapkey } = api;
-import { getLeaderKey, raise } from './utils';
+import { click, getLeaderKey, hover, raise, unhover } from './utils';
 
 const LEADER = getLeaderKey();
 const DARKMODE_SWITCHER = `${LEADER}d`;
@@ -17,28 +17,59 @@ function queryFrom(query, source) {
 
 function setupBilibili() {
     function toggleDarkMode() {
-        function isDark() {
-            // check current colorscheme
-            const styleId = '#__css-map__';
-            /** @type {HTMLLinkElement} */
-            const stylesheet = queryFrom(styleId, document.head);
-            return stylesheet.href.includes('dark.css');
+        // Surfingkeys only checks domains
+        // so check path here and do nothing for these pages
+        const link = window.location.href;
+        if (
+            /www\.bilibili\.com\/(?:blackboard|match|tv\/$|movie\/$|documentary\/$)/i.test(
+                link,
+            )
+        ) {
+            return;
         }
 
-        /** @param {Element} menu  */
-        function toggleColorscheme(menu) {
+        const ctx = {
+            avatarMenu: null,
+            colorschemeMenu: null,
+        };
+
+        /** Check current colorscheme. */
+        function isDark() {
+            if (link == 'https://www.bilibili.com/') {
+                // home page
+                return document
+                    .getElementsByTagName('html')[0]
+                    .classList.contains('bili_dark');
+            } else if (link.match('https://www.bilibili.com/video/')) {
+                // video page
+                return document
+                    .getElementsByTagName('html')[0]
+                    .classList.contains('night-mode');
+            } else {
+                // search page, user page, bangumi page, etc.
+                // check stylesheet
+                const styleId = '#__css-map__';
+                /** @type {HTMLLinkElement} */
+                const stylesheet = queryFrom(styleId, document.head);
+                return stylesheet.href.includes('dark.css');
+            }
+        }
+
+        /** @param {Element} options  */
+        function toggleColorscheme(options) {
             const mode = queryFrom(
                 `.single-link-item.sub-link-item:${
                     isDark() ? 'last' : 'first'
                 }-child`,
-                menu,
+                options,
             );
-            mode.dispatchEvent(new MouseEvent('click', { bubbles: true }));
 
-            // hide popups
-            queryFrom('.header-avatar-wrap', document).dispatchEvent(
-                new MouseEvent('mouseleave', { bubbles: true }),
-            );
+            // change colorscheme
+            click(mode);
+
+            // hide menu popups
+            unhover(ctx.colorschemeMenu);
+            unhover(ctx.avatarMenu);
         }
 
         /** @type {MutationCallback} */
@@ -52,7 +83,7 @@ function setupBilibili() {
                     classes.contains('v-popover')
                     && classes.contains('is-right')
                 ) {
-                    // colorscheme menu popped up
+                    // colorscheme options popped up
                     observer.disconnect();
                     toggleColorscheme(m.addedNodes[0]);
                 }
@@ -66,11 +97,10 @@ function setupBilibili() {
                 '.links-item:not(:has(~ .links-item)) .v-popover-wrap',
                 panel,
             );
+            ctx.colorschemeMenu = colorschemeMenu;
 
             // show colorscheme options
-            colorschemeMenu.dispatchEvent(
-                new MouseEvent('mouseenter', { bubbles: true }),
-            );
+            hover(colorschemeMenu);
 
             const colorschemeOptions = colorschemeMenu.querySelector(
                 '.v-popover.is-right',
@@ -78,7 +108,7 @@ function setupBilibili() {
             if (colorschemeOptions) {
                 toggleColorscheme(colorschemeOptions);
             } else {
-                // wait for the colorscheme selector to pop up
+                // wait for the colorscheme options to pop up
                 const colorschemeMenuObserver = new MutationObserver(
                     colorschemeMenuCallback,
                 );
@@ -108,11 +138,10 @@ function setupBilibili() {
         }
 
         const avatarMenu = queryFrom('.header-avatar-wrap', document);
+        ctx.avatarMenu = avatarMenu;
 
         // show avatar panel
-        avatarMenu.dispatchEvent(
-            new MouseEvent('mouseenter', { bubbles: true }),
-        );
+        hover(avatarMenu);
 
         const avatarPanel = avatarMenu.querySelector('.v-popover.is-bottom');
         if (avatarPanel) {
@@ -125,7 +154,7 @@ function setupBilibili() {
     }
 
     mapkey(DARKMODE_SWITCHER, 'Toggle dark mode', toggleDarkMode, {
-        domain: /.*\.bilibili\.com/i,
+        domain: /.*(?<!app|game|link|live|love|member|show)\.bilibili\.com/i,
     });
 }
 
