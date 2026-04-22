@@ -8,6 +8,7 @@ local enabled_fts = {
     'jsonc',
     'lua',
     'python',
+    'toml',
     'typescript',
     'query',
     'vim',
