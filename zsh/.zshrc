@@ -137,6 +137,7 @@ typeset -U path=(
     $path
 )
 typeset -U fpath=(
+    "$CUSTOM_SCRIPTS/env"
     "$CUSTOM_SCRIPTS/comp"
     $fpath
 )
