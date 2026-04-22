@@ -36,7 +36,7 @@ return {
             }
         else
             local cmds = cmdmap[opts.filetype]
-            local cmdstr = cmds:concat ' '
+            local cmdstr = table.concat(cmds, ' ')
             callback {
                 {
                     name = '@run with ' .. cmdstr,
