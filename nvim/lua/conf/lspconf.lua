@@ -157,6 +157,7 @@ local servers = {
     'jsonls',
     'lua_ls',
     'pyright',
+    'ruff',
     'ts_ls',
     'vue_ls',
 }
@@ -181,6 +182,30 @@ local enhanced_opts = {
         -- disable default formatter; preferring stylua
         opts.settings = { Lua = { format = { enable = false } } }
         opts.on_attach = no_formatter_on_attach
+    end,
+    ['ruff'] = function(opts)
+        -- used exclusively for formatting and import organization
+        opts.init_options = {
+            settings = {
+                fixAll = false,
+                lineLength = 79,
+                lint = { enable = false },
+                showSyntaxErrors = false,
+            },
+        }
+        opts.on_attach = function(_, bufnr)
+            local opt = mappings.documentFormatting
+            map('n', opt.lhs, function()
+                opt.rhs()
+                -- automatically organize imports
+                vim.lsp.buf.code_action {
+                    filter = function(x)
+                        return x.kind == 'source.organizeImports.ruff'
+                    end,
+                    apply = true,
+                }
+            end, { desc = opt.desc, buffer = bufnr })
+        end
     end,
     ['ts_ls'] = function(opts)
         -- disable default formatter; preferring prettierd

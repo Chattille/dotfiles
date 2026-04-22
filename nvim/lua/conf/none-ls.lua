@@ -40,11 +40,5 @@ nonels.setup {
                 PRETTIERD_DEFAULT_CONFIG = vim.fn.expand '~/.dotfiles/.prettierrc.json',
             },
         },
-
-        -- python
-        nonels.builtins.formatting.isort,
-        nonels.builtins.formatting.black.with {
-            extra_args = { '--line-length', '80' },
-        },
     },
 }
