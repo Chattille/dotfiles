@@ -1,10 +1,10 @@
 local cmdmap = {
-    bash = 'bash',
-    javascript = 'node',
-    lua = 'lua',
-    python = 'python',
-    sh = 'sh',
-    zsh = 'zsh',
+    bash = { 'bash' },
+    javascript = { 'node' },
+    lua = { 'lua' },
+    python = { 'uv', 'run' },
+    sh = { 'sh' },
+    zsh = { 'zsh' },
 }
 
 return {
@@ -35,18 +35,19 @@ return {
                 },
             }
         else
-            local cmd = cmdmap[opts.filetype]
+            local cmds = cmdmap[opts.filetype]
+            local cmdstr = cmds:concat ' '
             callback {
                 {
-                    name = '@run with ' .. cmd,
+                    name = '@run with ' .. cmdstr,
                     tags = { 'RUN', 'DEFAULT' },
                     builder = function()
                         return {
-                            name = 'Run with '
-                                .. cmd:sub(1, 1):upper()
-                                .. cmd:sub(2),
+                            name = 'Run with ' .. cmdstr,
                             cmd = '/bin/env',
-                            args = { cmd, fname },
+                            args = vim.iter({ '-S', cmds, fname })
+                                :flatten()
+                                :totable(),
                         }
                     end,
                 },

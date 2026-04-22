@@ -145,10 +145,6 @@ source $HOME/.zim/aliases.zsh
 
 # }}} End user configuration
 
-# {{ Pyenv
-(( $+commands[pyenv] )) && eval "$(pyenv init -)"
-# }}
-
 # {{ NVM
 # loads nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
