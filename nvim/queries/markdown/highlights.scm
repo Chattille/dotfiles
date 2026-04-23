@@ -38,7 +38,8 @@
   (#set! @markup.list.checked conceal "✓"))
 (list_item
   (task_list_marker_checked)
-  (_) @markup.list.checked) ; dim checked items
+  (_) @markup.list.checked
+  (#set! priority 105)) ; dim checked items
 
 ; blockquotes markers
 ((block_quote_marker) @punctuation.delimiter
