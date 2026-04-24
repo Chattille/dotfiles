@@ -156,9 +156,9 @@ local servers = {
     'html',
     'jsonls',
     'lua_ls',
-    'pyright',
     'ruff',
     'ts_ls',
+    'ty',
     'vue_ls',
 }
 
