@@ -31,6 +31,8 @@ setupSites();
 
 // ----- general -----
 map('<Ctrl-[>', '<Esc>');
+map('<Ctrl-x>', '<Alt-s>');
+unmap('<Alt-s>');
 
 // ----- tabs -----
 map('swap', 't');
