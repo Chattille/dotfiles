@@ -76,6 +76,13 @@ local mappings = {
         end,
         desc = 'Display hover information',
     },
+    inlayHint = {
+        lhs = '<Leader>ji',
+        rhs = function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end,
+        desc = 'Toggle inlay hints',
+    },
     references = {
         lhs = '<Leader>jR',
         rhs = function()
