@@ -217,15 +217,25 @@ local enhanced_opts = {
     ['ts_ls'] = function(opts)
         -- disable default formatter; preferring prettierd
         opts.on_attach = no_formatter_on_attach
+        opts.init_options = {
+            preferences = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+                importModuleSpecifierPreference = 'non-relative',
+            },
+        }
 
         if is_in_vue() then -- add support for Vue projects
-            opts.init_options = {
-                plugins = {
-                    {
-                        name = '@vue/typescript-plugin',
-                        location = '',
-                        languages = { 'javascript', 'typescript', 'vue' },
-                    },
+            opts.init_options.plugins = {
+                {
+                    name = '@vue/typescript-plugin',
+                    location = '',
+                    languages = { 'javascript', 'typescript', 'vue' },
                 },
             }
             opts.filetypes = { 'javascript', 'typescript', 'vue' }
