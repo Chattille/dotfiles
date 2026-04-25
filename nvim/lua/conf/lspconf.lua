@@ -217,6 +217,8 @@ local enhanced_opts = {
     ['ts_ls'] = function(opts)
         -- disable default formatter; preferring prettierd
         opts.on_attach = no_formatter_on_attach
+
+        -- enable inlay hints
         opts.init_options = {
             preferences = {
                 includeInlayParameterNameHints = 'all',
