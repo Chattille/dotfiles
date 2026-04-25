@@ -32,7 +32,7 @@ return {
         local templs = {}
         for cmd, _ in pairs(json.scripts) do
             table.insert(templs, {
-                name = "@run npm script '" .. cmd .. "'",
+                name = "run npm script '" .. cmd .. "'",
                 tags = { cmd_tag[cmd] },
                 builder = function()
                     return {
