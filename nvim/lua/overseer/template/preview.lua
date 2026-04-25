@@ -62,8 +62,7 @@ return {
                     return {
                         name = 'Open in Browser',
                         strategy = 'jobstart',
-                        cmd = 'explorer.exe',
-                        args = { vim.fn.expand '%:t' },
+                        cmd = { 'explorer.exe', vim.fn.expand '%:t' },
                     }
                 end,
             },

@@ -92,8 +92,7 @@ return {
                 builder = function(params)
                     return {
                         name = 'CMake Build',
-                        cmd = 'cmake',
-                        args = { '-B', build, root },
+                        cmd = { 'cmake', '-B', build, root },
                         strategy = params.strategy,
                     }
                 end,
@@ -111,8 +110,7 @@ return {
                 builder = function(params)
                     return {
                         name = 'Make Build',
-                        cmd = 'make',
-                        args = { '-C', build },
+                        cmd = { 'make', '-C', build },
                         strategy = params.strategy,
                     }
                 end,
@@ -123,8 +121,7 @@ return {
                 builder = function()
                     return {
                         name = 'Make Run',
-                        cmd = 'make',
-                        args = { '--silent', '-C', build, 'run/fast' },
+                        cmd = { 'make', '--silent', '-C', build, 'run/fast' },
                     }
                 end,
             },

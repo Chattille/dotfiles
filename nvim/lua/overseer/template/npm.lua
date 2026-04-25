@@ -1,6 +1,10 @@
 local fs = require 'util.files'
 
-local enabled_fts = { 'javascript', 'json', 'jsonc', 'typescript', 'vue' }
+local cmd_tag = {
+    build = 'BUILD',
+    run = 'RUN',
+    test = 'TEST',
+}
 
 ---Get root directory of an NPM project.
 ---@return string? # Path to the root directory.
@@ -10,10 +14,7 @@ end
 
 return {
     condition = {
-        callback = function(opts)
-            return vim.list_contains(enabled_fts, opts.filetype)
-                and (get_npm_root() and true or false)
-        end,
+        filetype = { 'javascript', 'json', 'jsonc', 'typescript', 'vue' },
     },
     generator = function(_, callback)
         local root = get_npm_root()
@@ -31,13 +32,12 @@ return {
         local templs = {}
         for cmd, _ in pairs(json.scripts) do
             table.insert(templs, {
-                name = 'npm run ' .. cmd,
-                tags = { 'RUN' },
+                name = "@run npm script '" .. cmd .. "'",
+                tags = { cmd_tag[cmd] },
                 builder = function()
                     return {
                         name = 'NPM Run: ' .. cmd,
-                        cmd = 'npm',
-                        args = { 'run', cmd },
+                        cmd = { 'npm', 'run', cmd },
                     }
                 end,
             })

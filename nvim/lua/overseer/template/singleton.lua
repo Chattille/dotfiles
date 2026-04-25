@@ -44,8 +44,7 @@ return {
                     builder = function()
                         return {
                             name = 'Run with ' .. cmdstr,
-                            cmd = '/bin/env',
-                            args = vim.iter({ '-S', cmds, fname })
+                            cmd = vim.iter({ '/bin/env', '-S', cmds, fname })
                                 :flatten()
                                 :totable(),
                         }
