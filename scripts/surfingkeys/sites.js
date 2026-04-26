@@ -18,7 +18,7 @@ function queryFrom(query, source) {
 function setupBilibili() {
     function toggleDarkMode() {
         // Surfingkeys only checks domains
-        // so check path here and do nothing for these pages
+        // so check paths here and do nothing for these pages
         const link = window.location.href;
         if (
             /www\.bilibili\.com\/(?:blackboard|match|tv\/$|movie\/$|documentary\/$)/i.test(
