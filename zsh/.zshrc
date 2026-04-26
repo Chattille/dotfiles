@@ -1,22 +1,13 @@
-# Start configuration added by Zim install {{{
-#
-# User configuration sourced by interactive shells
-#
+# ============================
+# }}} Custom Configuration {{{
+# ============================
 
-# -----------------
-# Zsh configuration
-# -----------------
-
-#
-# History
-#
+# ----------
+# Zsh Config
+# ----------
 
 # Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
-
-#
-# Input/output
-#
 
 # Prompt
 PROMPT='%2~ ${(e)git_info[prompt]}» '
@@ -24,25 +15,52 @@ PROMPT='%2~ ${(e)git_info[prompt]}» '
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -e
 
-# Prompt for spelling correction of commands.
-#setopt CORRECT
+# -----------
+# Tool Config
+# -----------
 
-# Customize spelling correction prompt.
-#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+# Less
+export LESS=FR
+export LESSHISTFILE=-
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+
+# ---------
+# Variables
+# ---------
+
+# Shell varaibles
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
 
-# -----------------
-# Zim configuration
-# -----------------
+# Env variables
+export CUSTOM_SCRIPTS="$HOME/.dotfiles/scripts"
+export LOCAL_BIN="$HOME/.local/bin"
+typeset -U path=(
+    $LOCAL_BIN
+    "$CUSTOM_SCRIPTS/bin"
+    $path
+)
+typeset -U fpath=(
+    "$CUSTOM_SCRIPTS/env"
+    "$CUSTOM_SCRIPTS/comp"
+    $fpath
+)
 
-# Use degit instead of git as the default tool to install and update modules.
-#zstyle ':zim:zmodule' use 'degit'
+# -------
+# Aliases
+# -------
 
-# --------------------
-# Module configuration
-# --------------------
+source "$HOME/.zim/aliases.zsh"
+
+# ====================
+# }}} Zimfw Config {{{
+# ====================
+
+# -------------
+# Module Config
+# -------------
 
 #
 # git-info
@@ -79,9 +97,9 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 #typeset -A ZSH_HIGHLIGHT_STYLES
 #ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
-# ------------------
-# Initialize modules
-# ------------------
+# -----------
+# Module Init
+# -----------
 
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 # Download zimfw plugin manager if missing.
@@ -101,9 +119,9 @@ fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
-# ------------------------------
-# Post-init module configuration
-# ------------------------------
+# -----------------------
+# Post-Init Module Config
+# -----------------------
 
 #
 # zsh-history-substring-search
@@ -116,37 +134,11 @@ for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search
 for key ('k') bindkey -M vicmd ${key} history-substring-search-up
 for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
-# }}} End configuration added by Zim install
 
-# {{{ User configuration
+# ==================
+# }}} NVM Config {{{
+# ==================
 
-# config
-export LESS=FR
-export LESSHISTFILE=-
-export NVM_DIR="$HOME/.nvm"
-
-# environment
-export CUSTOM_SCRIPTS="$HOME/.dotfiles/scripts"
-export LOCAL_BIN="$HOME/.local/bin"
-export PYENV_ROOT="$HOME/.pyenv"
-
-typeset -U path=(
-    "$PYENV_ROOT/bin"
-    $LOCAL_BIN
-    "$CUSTOM_SCRIPTS/bin"
-    $path
-)
-typeset -U fpath=(
-    "$CUSTOM_SCRIPTS/env"
-    "$CUSTOM_SCRIPTS/comp"
-    $fpath
-)
-
-source $HOME/.zim/aliases.zsh
-
-# }}} End user configuration
-
-# {{ NVM
 # loads nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 # loads nvm bash_completion
