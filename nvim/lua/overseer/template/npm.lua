@@ -37,7 +37,7 @@ return {
                 builder = function()
                     return {
                         name = 'NPM Run: ' .. cmd,
-                        cmd = { 'npm', 'run', cmd },
+                        cmd = { 'npm', 'run', '--silent', cmd },
                     }
                 end,
             })
