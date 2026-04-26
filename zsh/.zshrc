@@ -23,9 +23,6 @@ bindkey -e
 export LESS=FR
 export LESSHISTFILE=-
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-
 # ---------
 # Variables
 # ---------
@@ -136,11 +133,15 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 
 # ==================
-# }}} NVM Config {{{
+# }}} FNM Config {{{
 # ==================
 
-# loads nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# loads nvm bash_completion
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-# }}
+export FNM_PATH="$HOME/.local/share/fnm"
+if [[ -d "$FNM_PATH" ]] {
+    typeset -U path=("$FNM_PATH" $path)
+    eval "$(fnm env \
+            --use-on-cd \
+            --version-file-strategy=recursive \
+            --resolve-engines \
+            --shell zsh)"
+}
