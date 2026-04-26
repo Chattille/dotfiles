@@ -26,14 +26,14 @@ return {
             ) and (get_cmake_root() and true or false)
         end,
     },
-    generator = function(_, callback)
+    generator = function()
         local root = get_cmake_root()
         if not root then
-            callback '[Template cmake] Root directory not found'
+            return '[Template cmake] Root directory not found'
         end
         local build = root .. '/build'
 
-        callback {
+        return {
             {
                 name = '@build & run',
                 tags = { 'BUILD', 'RUN', 'DEFAULT' },

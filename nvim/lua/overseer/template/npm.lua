@@ -16,16 +16,16 @@ return {
     condition = {
         filetype = { 'javascript', 'json', 'jsonc', 'typescript', 'vue' },
     },
-    generator = function(_, callback)
+    generator = function()
         local root = get_npm_root()
         if not root then
-            callback '[Template npm] Root directory not found'
+            return '[Template npm] Root directory not found'
         end
 
         -- read package.json
         local json = fs.load_json_file(root .. '/package.json')
         if not json.scripts or vim.tbl_isempty(json.scripts) then
-            callback '[Template npm] No custom scripts'
+            return '[Template npm] No custom scripts'
         end
 
         -- add custom scripts defined in package.json
@@ -43,6 +43,6 @@ return {
             })
         end
 
-        callback(templs)
+        return templs
     end,
 }

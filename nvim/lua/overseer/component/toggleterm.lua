@@ -115,10 +115,6 @@ return {
             on_init = function(_, task)
                 task.strategy = ToggletermStrategy.new()
             end,
-            on_exit = function(_, task)
-                -- send one last line end
-                task.strategy:send 'echo'
-            end,
         }
     end,
 }

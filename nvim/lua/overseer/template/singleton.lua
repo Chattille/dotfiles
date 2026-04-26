@@ -18,14 +18,14 @@ return {
             'zsh',
         },
     },
-    generator = function(opts, callback)
+    generator = function(opts)
         local fpath = vim.api.nvim_buf_get_name(0)
         local fname = vim.fn.expand '%:t'
         local fperm = vim.fn.getfperm(fpath)
         local isexecutable = fperm:sub(3, 3) == 'x'
 
         if isexecutable then
-            callback {
+            return {
                 {
                     name = '@execute ' .. fname,
                     tags = { 'RUN', 'DEFAULT' },
@@ -37,7 +37,7 @@ return {
         else
             local cmds = cmdmap[opts.filetype]
             local cmdstr = table.concat(cmds, ' ')
-            callback {
+            return {
                 {
                     name = '@run with ' .. cmdstr,
                     tags = { 'RUN', 'DEFAULT' },

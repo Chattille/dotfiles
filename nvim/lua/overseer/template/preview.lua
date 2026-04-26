@@ -33,7 +33,7 @@ return {
             'typescript',
         },
     },
-    generator = function(opts, callback)
+    generator = function(opts)
         local root = vim.fs.root(opts.dir, { 'package.json', 'index.html' })
 
         local tags
@@ -48,7 +48,7 @@ return {
             name = '@live preview'
         end
 
-        callback {
+        return {
             {
                 name = name,
                 tags = tags,
