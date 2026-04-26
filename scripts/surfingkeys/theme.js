@@ -1,3 +1,5 @@
+// Catppuccin
+// copied from https://github.com/WalkQuackBack/ctp-surfingkeys
 export default theme = `
 .sk_theme {
   background: #1e1e2eff;
