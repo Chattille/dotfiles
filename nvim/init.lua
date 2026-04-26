@@ -1,8 +1,9 @@
 -- providers
 vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
 vim.g.python3_host_prog = vim.fn.expand '~/.local/share/nvim/.venv/bin/python'
 vim.g.node_host_prog =
-    vim.fn.glob '~/.nvm/versions/node/v*/lib/node_modules/neovim/bin/cli.js'
+    vim.fn.expand '~/.local/share/nvim/node_modules/.bin/neovim-node-host'
 
 -- options
 vim.o.expandtab = true
