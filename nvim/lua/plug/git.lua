@@ -8,21 +8,40 @@ return {
     opts = {
         preview_config = { border = 'rounded' },
         on_attach = function(bufnr)
-            local map = function(lhs, rhs, desc)
-                vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })
+            local map = function(mode, lhs, rhs, desc)
+                vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
             end
             local gs = require 'gitsigns'
 
-            map('<Leader>gg', gs.preview_hunk, 'Git preview hunk')
-            map('<Leader>gs', gs.stage_hunk, 'Git stage hunk')
-            map('<Leader>gS', gs.stage_buffer, 'Git stage buffer')
-            map('<Leader>gu', gs.undo_stage_hunk, 'Git undo stage hunk')
-            map('<Leader>gr', gs.reset_hunk, 'Git reset hunk')
-            map('<Leader>gR', gs.reset_buffer, 'Git reset buffer')
-            map('[g', function()
+            map('n', '<Leader>gg', gs.preview_hunk, 'Git preview hunk')
+            map({ 'n', 'x' }, '<Leader>gs', function()
+                local mode = vim.api.nvim_get_mode().mode
+                if vim.tbl_contains({ 'v', 'V', '' }, mode) then
+                    gs.stage_hunk {
+                        vim.fn.getpos('v')[2],
+                        vim.fn.getpos('.')[2],
+                    }
+                else
+                    gs.stage_hunk()
+                end
+            end, 'Git un/stage hunk')
+            map('n', '<Leader>gS', gs.stage_buffer, 'Git stage buffer')
+            map({ 'n', 'x' }, '<Leader>gr', function()
+                local mode = vim.api.nvim_get_mode().mode
+                if vim.tbl_contains({ 'v', 'V', '' }, mode) then
+                    gs.reset_hunk {
+                        vim.fn.getpos('v')[2],
+                        vim.fn.getpos('.')[2],
+                    }
+                else
+                    gs.reset_hunk()
+                end
+            end, 'Git reset hunk')
+            map('n', '<Leader>gR', gs.reset_buffer, 'Git reset buffer')
+            map('n', '[g', function()
                 gs.nav_hunk 'prev'
             end, 'Git go to previous hunk')
-            map(']g', function()
+            map('n', ']g', function()
                 gs.nav_hunk 'next'
             end, 'Git go to next hunk')
 
