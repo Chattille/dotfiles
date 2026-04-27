@@ -100,7 +100,6 @@ local mappings = {
 ---@class KeymapOpts
 ---@field client unknown LSP cilent.
 ---@field bufnr number Buffer number.
----@field skip? string[] List of providers that should keymaps not be set for.
 
 ---Set keymaps.
 ---@param opts KeymapOpts
@@ -108,13 +107,7 @@ local function set_keymaps(opts)
     local caps = opts.client.server_capabilities
 
     for provider, opt in pairs(mappings) do
-        if
-            provider == 'diagnostic'
-            or (
-                caps[provider .. 'Provider']
-                and not (opts.skip and vim.list_contains(opts.skip, provider))
-            )
-        then
+        if provider == 'diagnostic' or caps[provider .. 'Provider'] then
             map(
                 'n',
                 opt.lhs,
@@ -125,18 +118,9 @@ local function set_keymaps(opts)
     end
 end
 
----Default on_attach() for all LSPs.
-local function default_on_attach(client, bufnr)
+---General on_attach() for all LSPs. Sets keymaps.
+local function general_on_attach(client, bufnr)
     set_keymaps { client = client, bufnr = bufnr }
-end
-
----Same as the default on_attach() but with formatter disabled.
-local function no_formatter_on_attach(client, bufnr)
-    set_keymaps {
-        client = client,
-        bufnr = bufnr,
-        skip = { 'documentFormatting' },
-    }
 end
 
 ---Is currently in a Vue project?
@@ -188,7 +172,11 @@ local enhanced_opts = {
     ['lua_ls'] = function(opts)
         -- disable default formatter; preferring stylua
         opts.settings = { Lua = { format = { enable = false } } }
-        opts.on_attach = no_formatter_on_attach
+        local old_on_attach = opts.on_attach
+        opts.on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            old_on_attach(client, bufnr)
+        end
     end,
     ['ruff'] = function(opts)
         -- used exclusively for formatting and import organization
@@ -216,15 +204,10 @@ local enhanced_opts = {
     end,
     ['ts_ls'] = function(opts)
         -- disable default formatter; preferring prettierd
-        local old_on_attach = vim.lsp.config.ts_ls.on_attach
-        if old_on_attach then
-            -- retain old `on_attach()`, which creates two commands
-            opts.on_attach = function(client, bufnr)
-                old_on_attach(client, bufnr)
-                no_formatter_on_attach(client, bufnr)
-            end
-        else
-            opts.on_attach = no_formatter_on_attach
+        local old_on_attach = opts.on_attach
+        opts.on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            old_on_attach(client, bufnr)
         end
 
         -- enable inlay hints
@@ -258,10 +241,18 @@ local defcap = require('cmp_nvim_lsp').default_capabilities()
 defcap.textDocument.completion.completionItem.snippetSupport = true
 
 for _, server in ipairs(servers) do
-    local opts = {
-        on_attach = default_on_attach,
-        capabilities = defcap,
-    }
+    local opts = { capabilities = defcap }
+
+    local default_on_attach = vim.lsp.config[server].on_attach
+    if default_on_attach then
+        -- retain lspconfig's default on_attach
+        opts.on_attach = function(client, bufnr)
+            default_on_attach(client, bufnr)
+            general_on_attach(client, bufnr)
+        end
+    else
+        opts.on_attach = general_on_attach
+    end
 
     if enhanced_opts[server] then
         enhanced_opts[server](opts)
