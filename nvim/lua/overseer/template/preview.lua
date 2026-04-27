@@ -1,3 +1,11 @@
+local components = {
+    'on_exit_set_status',
+    {
+        'on_complete_dispose',
+        require_view = { 'SUCCESS', 'FAILURE' },
+    },
+}
+
 ---Generate live preview builder.
 ---@param cwd string Working directory.
 ---@return function # Builder function.
@@ -5,9 +13,9 @@ local function get_builder(cwd)
     return function()
         return {
             name = 'Browser-sync',
-            strategy = 'jobstart',
-            cmd = 'browser-sync',
-            args = {
+            components = components,
+            cmd = {
+                'browser-sync',
                 'start',
                 '--server',
                 '--watch',
@@ -61,7 +69,7 @@ return {
                 builder = function()
                     return {
                         name = 'Open in Browser',
-                        strategy = 'jobstart',
+                        components = components,
                         cmd = { 'explorer.exe', vim.fn.expand '%:t' },
                     }
                 end,
