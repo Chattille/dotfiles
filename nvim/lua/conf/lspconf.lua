@@ -216,7 +216,16 @@ local enhanced_opts = {
     end,
     ['ts_ls'] = function(opts)
         -- disable default formatter; preferring prettierd
-        opts.on_attach = no_formatter_on_attach
+        local old_on_attach = vim.lsp.config.ts_ls.on_attach
+        if old_on_attach then
+            -- retain old `on_attach()`, which creates two commands
+            opts.on_attach = function(client, bufnr)
+                old_on_attach(client, bufnr)
+                no_formatter_on_attach(client, bufnr)
+            end
+        else
+            opts.on_attach = no_formatter_on_attach
+        end
 
         -- enable inlay hints
         opts.init_options = {
