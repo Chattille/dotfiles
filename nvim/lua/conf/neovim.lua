@@ -17,7 +17,7 @@ map('n', ';s', '<Cmd>silent update<CR>')
 map('n', ';X', '<Cmd>quit!<CR>')
 map('n', ';Q', '<Cmd>update | quit<CR>')
 
----Filetypes ignored on quit
+---Buftypes ignored on quit
 local autoclosables = { 'nofile', 'terminal' }
 
 ---Print out less verbose error messages.
