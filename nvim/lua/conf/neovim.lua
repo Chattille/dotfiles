@@ -22,7 +22,7 @@ local autoclosables = { 'nofile', 'terminal' }
 
 ---Print out less verbose error messages.
 ---
----@param cmd string NeoVim command.
+---@param cmd string A Neovim command.
 local function call(cmd)
     ---@diagnostic disable-next-line: param-type-mismatch
     xpcall(vim.cmd, function(msg)
@@ -42,7 +42,7 @@ local function nonauto_count(wins)
     end, wins)
 end
 
----Quit NeoVim or tab on last non-autoclosable window.
+---Quit Neovim or tab on last non-autoclosable window.
 local function quit()
     local wins = vim.api.nvim_tabpage_list_wins(0)
     if
@@ -67,5 +67,5 @@ map(
     'n',
     ';q',
     quit,
-    { desc = 'Quit NeoVim or tab on last non-autoclosable window' }
+    { desc = 'Quit Neovim or tab on last non-autoclosable window' }
 )
