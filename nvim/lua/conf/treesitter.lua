@@ -4,6 +4,7 @@ local enabled_fts = {
     'c',
     'html',
     'javascript',
+    'jq',
     'json',
     'jsonc',
     'lua',
