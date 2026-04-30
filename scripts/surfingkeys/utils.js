@@ -29,8 +29,18 @@ function getCloseRegex() {
  * @param {Element} elem
  */
 function isRenderable(elem) {
-    if (elem.offsetWidth && elem.offsetHeight) return true;
-    else return false;
+    const elemRect = elem.getBoundingClientRect();
+    return (
+        // has size or is a line
+        elemRect.width + elemRect.height > 0
+        // is in viewport
+        && elemRect.top >= 0
+        && elemRect.left >= 0
+        && elemRect.bottom
+            <= (window.innerHeight || document.documentElement.clientHeight)
+        && elemRect.right
+            <= (window.innerWidth || document.documentElement.clientWidth)
+    );
 }
 
 /**
