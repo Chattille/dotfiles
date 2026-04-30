@@ -164,10 +164,22 @@ local enhanced_opts = {
         opts.init_options = { cache = { directory = '/tmp/.ccls-cache' } }
     end,
     ['emmet_language_server'] = function(opts)
-        opts.init_options = {
-            showSuggestionsAsSnippets = true,
-            syntaxProfiles = { html = 'xhtml' },
+        -- disable in vue
+        opts.filetypes = {
+            'astro',
+            'css',
+            'eruby',
+            'html',
+            'htmlangular',
+            'htmldjango',
+            'javascriptreact',
+            'less',
+            'sass',
+            'scss',
+            'svelte',
+            'typescriptreact',
         }
+        opts.init_options = { showSuggestionsAsSnippets = true }
     end,
     ['lua_ls'] = function(opts)
         -- disable default formatter; preferring stylua
