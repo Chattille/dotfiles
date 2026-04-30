@@ -247,6 +247,9 @@ local enhanced_opts = {
             opts.filetypes = { 'javascript', 'typescript', 'vue' }
         end
     end,
+    ['vue_ls'] = function(opts)
+        opts.settings = { emmet = { showSuggestionsAsSnippets = true } }
+    end,
 }
 
 local defcap = require('cmp_nvim_lsp').default_capabilities()
