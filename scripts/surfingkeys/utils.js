@@ -1,5 +1,6 @@
 const LEADER = '\\';
-const CLOSE_REGEX = /\bclose\b|关闭|關閉|✕|×/i;
+const CLOSE_REGEX_ATTR = /(?<![a-zA-Z0-9])close(?![a-zA-Z0-9])/i;
+const CLOSE_REGEX_TEXT = /\bclose\b|关闭|關閉|✕|×/i;
 
 /**
  * Throw an error with `msg`.
@@ -19,10 +20,12 @@ function getLeaderKey() {
 
 /**
  * Return regex for close buttons.
+ * @param {'text' | 'attr'} type Regex for matching `text`-like content or HTML `attr`s.
  * @return {RegExp}
  */
-function getCloseRegex() {
-    return CLOSE_REGEX;
+function getCloseRegex(type) {
+    if (type === 'text') return CLOSE_REGEX_TEXT;
+    else return CLOSE_REGEX_ATTR;
 }
 
 /**
