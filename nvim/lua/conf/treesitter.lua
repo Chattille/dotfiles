@@ -2,12 +2,14 @@
 
 local enabled_fts = {
     'c',
+    'cmake',
     'html',
     'javascript',
     'jq',
     'json',
     'jsonc',
     'lua',
+    'make',
     'python',
     'toml',
     'typescript',
