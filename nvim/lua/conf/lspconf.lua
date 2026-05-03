@@ -138,8 +138,6 @@ end
 
 -- }}} LSPs {{{
 
-local lspconfig = require 'lspconfig'
-local root_pattern = lspconfig.util.root_pattern
 local servers = {
     'ccls',
     'cssls',
@@ -155,12 +153,12 @@ local servers = {
 
 local enhanced_opts = {
     ['ccls'] = function(opts)
-        opts.root_dir = root_pattern(
+        opts.root_markers = {
+            '.ccls',
             '.clang-format',
             '.git',
             'compile_commands.json',
-            '.ccls'
-        )
+        }
         opts.init_options = { cache = { directory = '/tmp/.ccls-cache' } }
     end,
     ['emmet_language_server'] = function(opts)
