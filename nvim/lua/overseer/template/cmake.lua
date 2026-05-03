@@ -1,8 +1,5 @@
 local buf_get_real_base = require('util.files').buf_get_real_base
 
-local enabled_fts = { 'c', 'cpp' }
-local tglt_default = { 'toggleterm', direction = 'horizontal' }
-
 ---Get the top root directory for CMake projects.
 ---
 ---@return string? # Root path.
@@ -18,20 +15,34 @@ local function get_cmake_root()
 end
 
 return {
-    condition = {
-        callback = function(opts)
-            return vim.list_contains(
-                enabled_fts,
-                opts.filetype or vim.bo.filetype
-            ) and (get_cmake_root() and true or false)
-        end,
-    },
+    condition = { filetype = { 'c', 'cpp' } },
     generator = function()
         local root = get_cmake_root()
         if not root then
             return '[Template cmake] Root directory not found'
         end
+
         local build = root .. '/build'
+
+        local run = {
+            name = 'Make Run',
+            cmd = { 'make', '--silent', '-C', build, 'run/fast' },
+        }
+        local make_build = {
+            name = 'Make Build',
+            cmd = { 'make', '-C', build },
+        }
+        local cmake_build = {
+            name = 'CMake Build',
+            cmd = { 'cmake', '-B', build, root },
+        }
+
+        local classic = { components = { 'classic' } }
+
+        local cmake_build_classic =
+            vim.tbl_deep_extend('keep', classic, cmake_build)
+        local make_build_classic =
+            vim.tbl_deep_extend('keep', classic, make_build)
 
         return {
             {
@@ -43,86 +54,51 @@ return {
                         strategy = {
                             'orchestrator',
                             tasks = {
-                                {
-                                    'build (cmake & make)',
-                                    strategy = 'jobstart',
-                                },
-                                'run',
+                                cmake_build_classic,
+                                make_build_classic,
+                                run,
                             },
                         },
+                        components = { 'classic' },
                     }
                 end,
             },
             {
                 name = 'build (cmake & make)',
                 tags = { 'BUILD' },
-                params = {
-                    strategy = {
-                        type = 'string',
-                        optional = true,
-                        default = tglt_default,
-                    },
-                },
-                builder = function(params)
+                builder = function()
                     return {
                         name = 'CMake and Make Build',
                         strategy = {
                             'orchestrator',
                             tasks = {
-                                {
-                                    'build (cmake)',
-                                    strategy = params.strategy,
-                                },
-                                { 'build (make)', strategy = params.strategy },
+                                cmake_build_classic,
+                                make_build_classic,
                             },
                         },
+                        components = { 'classic' },
                     }
                 end,
             },
             {
                 name = 'build (cmake)',
                 tags = { 'BUILD' },
-                params = {
-                    strategy = {
-                        type = 'string',
-                        optional = true,
-                        default = tglt_default,
-                    },
-                },
-                builder = function(params)
-                    return {
-                        name = 'CMake Build',
-                        cmd = { 'cmake', '-B', build, root },
-                        strategy = params.strategy,
-                    }
+                builder = function()
+                    return cmake_build
                 end,
             },
             {
                 name = 'build (make)',
                 tags = { 'BUILD' },
-                params = {
-                    strategy = {
-                        type = 'string',
-                        optional = true,
-                        default = tglt_default,
-                    },
-                },
-                builder = function(params)
-                    return {
-                        name = 'Make Build',
-                        cmd = { 'make', '-C', build },
-                        strategy = params.strategy,
-                    }
+                builder = function()
+                    return make_build
                 end,
             },
             {
                 name = 'run',
                 tags = { 'RUN' },
                 builder = function()
-                    return {
-                        name = 'Make Run',
-                        cmd = { 'make', '--silent', '-C', build, 'run/fast' },
-                    }
+                    return run
                 end,
             },
         }
