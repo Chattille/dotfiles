@@ -30,6 +30,13 @@ return {
                         require_view = { 'SUCCESS', 'FAILURE' },
                     },
                 },
+                classic = {
+                    'on_exit_set_status',
+                    {
+                        'on_complete_dispose',
+                        require_view = { 'SUCCESS', 'FAILURE' },
+                    },
+                },
             },
             form = { border = 'rounded' },
             task_list = {
