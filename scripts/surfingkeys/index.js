@@ -1,25 +1,17 @@
-import theme from './theme';
-
+import searchAliases from './aliases';
 import { setupSites } from './sites';
+import theme from './theme';
 import {
     click,
     getClickableElements,
     getCloseRegex,
     getLeaderKey,
     hover,
+    setupSearchAliases,
     unhover,
 } from './utils';
 
-const {
-    Hints,
-    addSearchAlias,
-    imap,
-    iunmap,
-    map,
-    mapkey,
-    removeSearchAlias,
-    unmap,
-} = api;
+const { Hints, imap, iunmap, map, mapkey, removeSearchAlias, unmap } = api;
 
 const CLOSE_REGEX = getCloseRegex();
 const LEADER = getLeaderKey();
@@ -102,19 +94,7 @@ unmap('go');
 unmap('A'); // AI
 
 // ----- search -----
-addSearchAlias(
-    'G',
-    'github',
-    'https://github.com/search?q=',
-    's',
-    null,
-    null,
-    'o',
-    {
-        favicon_url:
-            'https://github.githubassets.com/favicons/favicon-dark.svg',
-    },
-);
+setupSearchAliases(searchAliases);
 removeSearchAlias('e'); // Wikipedia
 removeSearchAlias('w'); // Bing
 removeSearchAlias('s'); // Stackoverflow

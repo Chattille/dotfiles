@@ -1,3 +1,5 @@
+const { addSearchAlias } = api;
+
 const LEADER = '\\';
 const CLOSE_REGEX = /\bclose\b|关闭|關閉|✕|×/i;
 
@@ -165,6 +167,40 @@ function getClickableElements(selector, text, pats) {
     });
 }
 
+/**
+ * @callback SuggestionCallback
+ * @param {Object} response
+ * @param {string} response.text Suggestion response
+ * @param {Object} request
+ * @param {string} request.query Text of the query
+ * @param {string} request.url Formatted URL of the request
+ */
+
+/**
+ * @typedef {Object} SearchAliasOption
+ * @property {string=} faviconUrl Favicon URL
+ * @property {boolean=} skipMaps `True` to disable keymap creation
+ */
+
+/**
+ * @typedef {Object} SearchAlias
+ * @property {string} alias Key to trigger this search engine
+ * @property {string} prompt A caption
+ * @property {string} searchUrl Search engine URL. `{0}` for interpolation
+ * @property {string | null} searchLeaderKey Key for selection search ('s')
+ * @property {string | null} suggestionUrl URL to fetch search suggestions
+ * @property {SuggestionCallback | null} suggestionCallback Suggestion parser
+ * @property {string | null} onlyThisSite Key for current site search ('o')
+ * @property {SearchAliasOption | null} options Additional options
+ */
+
+/** @param {SearchAlias[]} list List of configs for search engine aliases */
+function setupSearchAliases(list) {
+    for (const conf of list) {
+        addSearchAlias(...Object.values(conf));
+    }
+}
+
 export {
     click,
     getClickableElements,
@@ -172,5 +208,6 @@ export {
     getCloseRegex,
     hover,
     raise,
+    setupSearchAliases,
     unhover,
 };
