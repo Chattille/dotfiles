@@ -4,14 +4,11 @@ import { setupSites } from './sites';
 import {
     click,
     getClickableElements,
-    getLeaderKey,
     getCloseRegex,
+    getLeaderKey,
     hover,
     unhover,
 } from './utils';
-
-const CLOSE_REGEX = getCloseRegex();
-const LEADER = getLeaderKey();
 
 const {
     Hints,
@@ -23,6 +20,9 @@ const {
     removeSearchAlias,
     unmap,
 } = api;
+
+const CLOSE_REGEX = getCloseRegex();
+const LEADER = getLeaderKey();
 
 // }}} Keymaps {{{
 
