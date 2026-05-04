@@ -10,8 +10,7 @@ import {
     unhover,
 } from './utils';
 
-const CLOSE_REGEX_ATTR = getCloseRegex('attr');
-const CLOSE_REGEX_TEXT = getCloseRegex('text');
+const CLOSE_REGEX = getCloseRegex();
 const LEADER = getLeaderKey();
 
 const {
@@ -72,10 +71,9 @@ unmap('p');
 map(`${LEADER}q`, 'q'); // pictures and buttons
 unmap('q');
 mapkey(`${LEADER}x`, 'Click close button', () => {
-    const elems = getClickableElements('[rel=close]', CLOSE_REGEX_TEXT, {
-        'aria-label': CLOSE_REGEX_TEXT,
-        title: CLOSE_REGEX_TEXT,
-        class: CLOSE_REGEX_ATTR,
+    const elems = getClickableElements('[rel=close]', CLOSE_REGEX, {
+        ['aria-label']: CLOSE_REGEX,
+        title: CLOSE_REGEX,
     });
     if (!elems.length) return;
 
