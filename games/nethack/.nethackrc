@@ -1,0 +1,76 @@
+# --- general ---
+OPTIONS=!tutorial
+
+OPTIONS=name:Alice
+
+OPTIONS=catname:Dinah
+OPTIONS=dogname:Puppy
+OPTIONS=horsename:Horsefly
+
+OPTIONS=disclose:yi +a +v +g +c +o
+
+OPTIONS=paranoid_confirmation:quit attack pray swim trap
+
+# --- UI ---
+OPTIONS=windowtype:curses
+
+OPTIONS=force_invmenu
+OPTIONS=time
+OPTIONS=msghistory:60
+
+OPTIONS=statushilites:10
+
+OPTIONS=hilite_status:gold/always/yellow
+
+OPTIONS=hilite_status:experience-level/changed/green/always/blue
+
+OPTIONS=hilite_status:armor-class/down/green/up/red
+
+OPTIONS=hilite_status:hitpoints/100%/green&bold
+OPTIONS=hilite_status:hitpoints/<100%/green
+OPTIONS=hilite_status:hitpoints/<60%/yellow
+OPTIONS=hilite_status:hitpoints/<40%/orange
+OPTIONS=hilite_status:hitpoints/<20%/red
+
+OPTIONS=hilite_status:characteristics/up/green/down/red
+OPTIONS=hilite_status:power/up/green/down/red
+
+OPTIONS=hilite_status:condition/major_troubles/red
+OPTIONS=hilite_status:condition/minor_troubles/orange
+OPTIONS=hilite_status:condition/lev/cyan/fly/cyan
+
+OPTIONS=hilite_status:hunger/satiated/yellow
+OPTIONS=hilite_status:hunger/hungry/yellow
+OPTIONS=hilite_status:hunger/weak/orange
+OPTIONS=hilite_status:hunger/fainting/red
+OPTIONS=hilite_status:hunger/fainted/red&bold
+OPTIONS=hilite_status:hunger/starved/red&inverse
+
+OPTIONS=hilite_status:carrying-capacity/burdened/yellow
+OPTIONS=hilite_status:carrying-capacity/stressed/orange
+OPTIONS=hilite_status:carrying-capacity/strained/red
+OPTIONS=hilite_status:carrying-capacity/overtaxed/red&bold
+OPTIONS=hilite_status:carrying-capacity/overloaded/red&inverse
+
+OPTIONS=hilite_pile
+
+OPTIONS=hitpointbar
+OPTIONS=lit_corridor
+
+OPTIONS=menucolors
+
+MENUCOLOR=" blessed "=green
+MENUCOLOR=" holy "=green
+MENUCOLOR=" cursed "=red
+MENUCOLOR=" unholy "=red
+MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=orange&underline
+MENUCOLOR="Amulet of Yendor named"=magenta
+MENUCOLOR="gold piece"=yellow
+# forgotten spells
+MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+[ ]+[0-9]+\*[ ]+[a-z]+[ ]+[0-9]+%"=magenta
+
+# --- symbols ---
+OPTIONS=symset:Enhanced1
+OPTIONS=boulder:0         # 0 DIGIT ZERO
+SYMBOLS=S_altar:U+03C0    # π GREEK SMALL LETTER PI
+SYMBOLS=S_engrcorr:U+2593 # ▓ DARK SHADE
