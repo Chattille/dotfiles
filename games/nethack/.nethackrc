@@ -34,26 +34,26 @@ OPTIONS=hilite_status:armor-class/down/green/up/red
 OPTIONS=hilite_status:hitpoints/100%/green&bold
 OPTIONS=hilite_status:hitpoints/<100%/green
 OPTIONS=hilite_status:hitpoints/<60%/yellow
-OPTIONS=hilite_status:hitpoints/<40%/red
-OPTIONS=hilite_status:hitpoints/<33%/red&bold
+OPTIONS=hilite_status:hitpoints/<40%/orange
+OPTIONS=hilite_status:hitpoints/<33%/red
 OPTIONS=hilite_status:hitpoints/<10%/red&inverse
 
 OPTIONS=hilite_status:characteristics/up/green/down/red
 OPTIONS=hilite_status:power/up/green/down/red
 
 OPTIONS=hilite_status:condition/major_troubles/red
-OPTIONS=hilite_status:condition/minor_troubles/yellow
+OPTIONS=hilite_status:condition/minor_troubles/orange
 OPTIONS=hilite_status:condition/lev/cyan/fly/cyan
 
 OPTIONS=hilite_status:hunger/satiated/yellow
 OPTIONS=hilite_status:hunger/hungry/yellow
-OPTIONS=hilite_status:hunger/weak/red
+OPTIONS=hilite_status:hunger/weak/orange
 OPTIONS=hilite_status:hunger/fainting/red
 OPTIONS=hilite_status:hunger/fainted/red&bold
 OPTIONS=hilite_status:hunger/starved/red&inverse
 
 OPTIONS=hilite_status:carrying-capacity/burdened/yellow
-OPTIONS=hilite_status:carrying-capacity/stressed/yellow
+OPTIONS=hilite_status:carrying-capacity/stressed/orange
 OPTIONS=hilite_status:carrying-capacity/strained/red
 OPTIONS=hilite_status:carrying-capacity/overtaxed/red&bold
 OPTIONS=hilite_status:carrying-capacity/overloaded/red&inverse
@@ -75,8 +75,9 @@ MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+[ ]+[0-9]+\*[ ]+[a-z]+[ ]+[0-9]+%"=magenta
 MENUCOLOR="\[Unskilled\]"=white&dim
 MENUCOLOR="\[Basic\]"=white
 MENUCOLOR="\[Skilled\]"=blue
-MENUCOLOR="\[Expert|Master\]"=blue&bold
-MENUCOLOR="\[Grand Master\]"=blue&inverse
+MENUCOLOR="\[Expert\]"=lightblue
+MENUCOLOR="\[Master\]"=lightblue&bold
+MENUCOLOR="\[Grand Master\]"=lightblue&inverse
 
 # --- symbols ---
 OPTIONS=symset:Enhanced1
