@@ -1,0 +1,28 @@
+{
+    "schemes": [
+        {
+            "background": "#1E1E2E",
+            "black": "#45475A",
+            "blue": "#54A5E5",
+            "brightBlack": "#585B70",
+            "brightBlue": "#89B4FA",
+            "brightCyan": "#94E2D5",
+            "brightGreen": "#A6E3A1",
+            "brightPurple": "#FFD0F5",
+            "brightRed": "#FFA1BE",
+            "brightWhite": "#BAC2DE",
+            "brightYellow": "#F9E2AF",
+            "cursorColor": "#F5E0DC",
+            "cyan": "#6EDBCD",
+            "foreground": "#CDD6F4",
+            "green": "#8CDB8E",
+            "name": "Catppuccin Mocha",
+            "purple": "#F5C2E7",
+            "red": "#E7809D",
+            "selectionBackground": "#585B70",
+            "white": "#A6ADC8",
+            "yellow": "#DAC493"
+        }
+    ],
+    "_description": "Windows Terminal Catppuccin colorscheme adapted from https://github.com/catppuccin/windows-terminal with custom adjustments to use actual bright colors"
+}
