@@ -1,7 +1,7 @@
 const { addSearchAlias } = api;
 
 const LEADER = '\\';
-const CLOSE_REGEX = /\bclose\b|关闭|關閉|✕|×/i;
+const CLOSE_REGEX = /\bclose\b|\bdismiss\b|关闭|關閉|✕|×/i;
 
 /**
  * Throw an error with `msg`.
