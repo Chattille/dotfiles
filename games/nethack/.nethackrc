@@ -18,6 +18,7 @@ OPTIONS=query_menu
 OPTIONS=popup_dialog
 OPTIONS=time
 OPTIONS=msghistory:60
+OPTIONS=msg_window:reversed
 OPTIONS=hitpointbar
 OPTIONS=lit_corridor
 OPTIONS=hilite_pile
