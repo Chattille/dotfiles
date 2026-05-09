@@ -15,7 +15,6 @@ OPTIONS=windowtype:tty
 
 OPTIONS=force_invmenu
 OPTIONS=query_menu
-OPTIONS=popup_dialog
 OPTIONS=time
 OPTIONS=msghistory:60
 OPTIONS=msg_window:reversed
