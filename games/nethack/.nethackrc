@@ -83,6 +83,9 @@ MENUCOLOR="\[Grand Master\]"=lightblue&inverse
 
 # --- symbols ---
 OPTIONS=symset:Enhanced1
-OPTIONS=boulder:0         # 0 DIGIT ZERO
-SYMBOLS=S_altar:U+03C0    # π GREEK SMALL LETTER PI
-SYMBOLS=S_engrcorr:U+2593 # ▓ DARK SHADE
+# 0 DIGIT ZERO (Can only be set via OPTIONS)
+OPTIONS=boulder:0
+# π GREEK SMALL LETTER PI
+SYMBOLS=S_altar:U+03C0
+# ▓ DARK SHADE
+SYMBOLS=S_engrcorr:U+2593
