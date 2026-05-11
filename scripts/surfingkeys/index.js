@@ -13,7 +13,8 @@ import {
 
 const { Hints, imap, iunmap, map, mapkey, removeSearchAlias, unmap } = api;
 
-const CLOSE_REGEX = getCloseRegex();
+const CLOSE_REGEX_TEXT = getCloseRegex('text');
+const CLOSE_REGEX_ATTR = getCloseRegex('attr');
 const LEADER = getLeaderKey();
 
 // }}} Keymaps {{{
@@ -63,9 +64,10 @@ unmap('p');
 map(`${LEADER}q`, 'q'); // pictures and buttons
 unmap('q');
 mapkey(`${LEADER}x`, 'Click close button', () => {
-    const elems = getClickableElements('[rel=close]', CLOSE_REGEX, {
-        ['aria-label']: CLOSE_REGEX,
-        title: CLOSE_REGEX,
+    const elems = getClickableElements('[rel=close]', CLOSE_REGEX_TEXT, {
+        ['aria-label']: CLOSE_REGEX_TEXT,
+        title: CLOSE_REGEX_TEXT,
+        class: CLOSE_REGEX_ATTR,
     });
     if (!elems.length) return;
 

@@ -1,7 +1,8 @@
 const { addSearchAlias } = api;
 
 const LEADER = '\\';
-const CLOSE_REGEX = /\bclose\b|\bdismiss\b|关闭|關閉|✕|×/i;
+const CLOSE_REGEX_TEXT = /\bclose\b|\bdismiss\b|关闭|關閉|✕|×/i;
+const CLOSE_REGEX_ATTR = /(?:close|dismiss)(?:-|_)(?:button|btn|icon)/i;
 
 /**
  * Throw an error with `msg`.
@@ -21,10 +22,11 @@ function getLeaderKey() {
 
 /**
  * Return regex for close buttons.
+ * @param {'text' | 'attr'} type
  * @return {RegExp}
  */
-function getCloseRegex() {
-    return CLOSE_REGEX;
+function getCloseRegex(type) {
+    return type === 'text' ? CLOSE_REGEX_TEXT : CLOSE_REGEX_ATTR;
 }
 
 /**
