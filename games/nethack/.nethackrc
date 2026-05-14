@@ -38,8 +38,14 @@ OPTIONS=hilite_status:hitpoints/<40%/orange
 OPTIONS=hilite_status:hitpoints/<33%/red
 OPTIONS=hilite_status:hitpoints/<10%/red&inverse
 
+OPTIONS=hilite_status:power/100%/green&bold
+OPTIONS=hilite_status:power/<100%/green
+OPTIONS=hilite_status:power/<60%/yellow
+OPTIONS=hilite_status:power/<40%/orange
+OPTIONS=hilite_status:power/<33%/red
+OPTIONS=hilite_status:power/<10%/red&inverse
+
 OPTIONS=hilite_status:characteristics/up/green/down/red
-OPTIONS=hilite_status:power/up/green/down/red
 
 OPTIONS=hilite_status:condition/major_troubles/red
 OPTIONS=hilite_status:condition/minor_troubles/orange
@@ -65,14 +71,21 @@ MENUCOLOR=" holy "=green
 MENUCOLOR=" cursed "=red
 MENUCOLOR=" unholy "=red
 
-MENUCOLOR="loadstone|wand (of|called) cancellation"=red&underline
+MENUCOLOR="loadstone|wand (of|called) cancellation"=yellow&underline
 MENUCOLOR="Amulet of Yendor named"=magenta&underline
 MENUCOLOR="gold piece"=yellow
 
-MENUCOLOR="\(lit\)"=nocolor&bold
+MENUCOLOR="(\(|, )lit\)"=nocolor&bold
+MENUCOLOR="cursed .* (\(|, )lit\)"=red&bold
 
 # forgotten spells
-MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+[ ]+[0-9]+\*[ ]+[a-z]+[ ]+[0-9]+%"=magenta
+#          name     level  cat     fail     retention
+MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +((91|96)%-)?100%"=green&bold
+MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +76%-100%"=green
+MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +51%-75%"=yellow
+MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +26%-50%"=orange
+MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +1%-25%"=red
+MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +\(gone\)"=nocolor&dim
 
 MENUCOLOR="\[Unskilled\]"=white&dim
 MENUCOLOR="\[Basic\]"=white
