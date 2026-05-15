@@ -44,12 +44,12 @@ alias gs='git status'
 
 # Functions
 du() {
-    command du -bsh "${1:-$PWD}" | cut -f 1
+    command du -bshL "${1:-$PWD}" | cut -f 1
 }
 
 ldu() {
     local target="${${1:-.}%/}"
-    command du -bahd 0 "$target"/* | sort -h
+    command du -bahd 0 "$target"/{*,.*} | sort -h
 }
 
 dk() {
