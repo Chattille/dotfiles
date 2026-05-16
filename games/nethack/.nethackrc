@@ -76,7 +76,7 @@ MENUCOLOR="Amulet of Yendor named"=magenta&underline
 MENUCOLOR="gold piece"=yellow
 
 MENUCOLOR="(\(|, )lit\)"=nocolor&bold
-MENUCOLOR="cursed .* (\(|, )lit\)"=red&bold
+MENUCOLOR=" cursed .* (\(|, )lit\)"=red&bold
 
 # forgotten spells
 #          name     level  cat     fail     retention
