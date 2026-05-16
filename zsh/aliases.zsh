@@ -49,7 +49,7 @@ du() {
 
 ldu() {
     local target="${${1:-.}%/}"
-    command du -bahd 0 "$target"/{*,.*} | sort -h
+    command du -bahd 0 "$target"/*(DN) | sort -h
 }
 
 dk() {
