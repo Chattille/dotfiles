@@ -1,5 +1,6 @@
 # --- general ---
 OPTIONS=!tutorial
+OPTIONS=!tips
 
 OPTIONS=name:Alice
 OPTIONS=catname:Dinah
@@ -10,19 +11,25 @@ OPTIONS=disclose:yi +a +v +g +c +o
 
 OPTIONS=paranoid_confirmation:quit attack pray swim trap
 
+# --- message --
+OPTIONS=msghistory:200
+OPTIONS=msg_window:reversed
+
+MSGTYPE=hide "You swap places with .*"
+MSGTYPE=norep "You see here .*"
+
 # --- UI ---
 OPTIONS=windowtype:tty
 
 OPTIONS=force_invmenu
 OPTIONS=query_menu
 OPTIONS=time
-OPTIONS=msghistory:200
-OPTIONS=msg_window:reversed
 OPTIONS=hitpointbar
 OPTIONS=lit_corridor
 OPTIONS=hilite_pile
 OPTIONS=hilite_pet
 
+# --- status line ---
 OPTIONS=statushilites:10
 
 OPTIONS=hilite_status:gold/always/yellow
@@ -64,21 +71,23 @@ OPTIONS=hilite_status:carrying-capacity/strained/red
 OPTIONS=hilite_status:carrying-capacity/overtaxed/red&bold
 OPTIONS=hilite_status:carrying-capacity/overloaded/red&inverse
 
+# --- menu colors ---
 OPTIONS=menucolors
 
-MENUCOLOR=" blessed "=green
-MENUCOLOR=" holy "=green
-MENUCOLOR=" cursed "=red
-MENUCOLOR=" unholy "=red
+MENUCOLOR=" blessed($| )"=green
+MENUCOLOR=" holy($| )"=green
+MENUCOLOR=" cursed($| )"=red
+MENUCOLOR=" unholy($| )"=red
 
 MENUCOLOR="loadstone|wand (of|called) cancellation"=yellow&underline
 MENUCOLOR="Amulet of Yendor named"=magenta&underline
 MENUCOLOR="gold piece"=yellow
 
 MENUCOLOR="(\(|, )lit\)"=nocolor&bold
-MENUCOLOR=" cursed .* (\(|, )lit\)"=red&bold
+MENUCOLOR=" blessed .*(\(|, )lit\)"=green&bold
+MENUCOLOR=" cursed .*(\(|, )lit\)"=red&bold
 
-# forgotten spells
+# retention of spells
 #          name     level  cat     fail     retention
 MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +((91|96)%-)?100%"=green&bold
 MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +76%-100%"=green
@@ -87,6 +96,7 @@ MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +26%-50%"=orange
 MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +1%-25%"=red
 MENUCOLOR="[a-z ]+ +[0-9] +[a-z]+ +[0-9]+% +\(gone\)"=nocolor&dim
 
+# skills
 MENUCOLOR="\[Unskilled\]"=white&dim
 MENUCOLOR="\[Basic\]"=white
 MENUCOLOR="\[Skilled\]"=blue
