@@ -16,6 +16,7 @@ OPTIONS=msghistory:200
 OPTIONS=msg_window:reversed
 
 MSGTYPE=hide "You swap places with .*"
+MSGTYPE=hide "Unknown command ' '\."
 MSGTYPE=norep "You see here .*"
 
 # --- UI ---
@@ -56,7 +57,7 @@ OPTIONS=hilite_status:characteristics/up/green/down/red
 
 OPTIONS=hilite_status:condition/major_troubles/red
 OPTIONS=hilite_status:condition/minor_troubles/orange
-OPTIONS=hilite_status:condition/lev/cyan/fly/cyan
+OPTIONS=hilite_status:condition/movement/cyan
 
 OPTIONS=hilite_status:hunger/satiated/yellow
 OPTIONS=hilite_status:hunger/hungry/yellow
