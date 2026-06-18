@@ -17,6 +17,7 @@ local enabled_fts = {
     'vim',
     'vimdoc',
     'vue',
+    'xml',
     'zsh',
 }
 vim.api.nvim_create_autocmd('FileType', {
