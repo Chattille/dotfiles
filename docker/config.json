@@ -1,4 +1,4 @@
 {
   "detachKeys": "ctrl-q,ctrl-q",
-  "psFormat": "[{{.Names}}]:\t\t{{.Status}}\n      ID: {{.ID}}\n   Image: {{.Image}}{{if .Ports}}\n   Ports: {{.Ports}}{{end}}{{if .Mounts}}\n Volumes: {{.Mounts}}{{end}}\n    Size: {{.Size}}\n"
+  "psFormat": "[{{.Names}}]:\t\t{{.Status}}\n      ID: {{.ID}}\n   Image: {{.Image}}\n    Size: {{.Size}}{{if .Ports}}\n   Ports: {{range $index, $port := split .Ports \", \"}}{{if ne $index 0}}\n          {{end}}{{$port}}{{end}}{{end}}{{if .Mounts}}\n Volumes: {{range $index, $mount := split .Mounts \",\"}}{{if ne $index 0}}\n          {{end}}{{$mount}}{{end}}{{end}}\n"
 }
