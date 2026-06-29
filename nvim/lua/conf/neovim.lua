@@ -10,6 +10,9 @@ map('c', '<C-k>', '<S-Right>')
 -- comment
 map('o', 'u', 'gc', { remap = true })
 
+-- fold
+map('n', '<Space>', 'za')
+
 -- windows and buffers
 map('n', ';', '<C-w>')
 map('n', '<C-s>', '<Cmd>nohlsearch<CR>')
