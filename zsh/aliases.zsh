@@ -59,10 +59,21 @@ dk() {
     case $cmd {
         cd) shift; command docker compose down "$@";;
         cu) shift; command docker compose up --detach "$@";;
-        ia) shift; command docker images --all --format "table" "$@";;
-        is) shift; command docker images --format "table" "$@";;
+        ia) shift; command docker images --all "$@";;
+        is) shift; command docker images "$@";;
+        ip)
+            shift
+            command docker images -a --format 'json' \
+                | jq -sr 'import "docker" as d; . | d::images' \
+                | column -ts $'\t'
+            ;;
         ns) shift; command docker network ls "$@";;
         pa) shift; command docker container ls --all "$@";;
+        pp)
+            shift
+            command docker container ls -as --format 'json' \
+                | jq -sr 'import "docker" as d; . | d::containers'
+            ;;
         vs) shift; command docker volume ls "$@";;
         *) command docker "$@";;
     }
