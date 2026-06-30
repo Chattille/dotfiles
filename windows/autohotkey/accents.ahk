@@ -14,11 +14,16 @@ Contexts := [
     "WindowsTerminal.exe",
     "WINWORD.EXE",
 ]
+
+ExcludedTitles := [
+    "NetHack",
+]
+
 NeedsAccents()
 {
-    for win in Contexts
+    for Win in Contexts
     {
-        if WinActive("ahk_exe " . win)
+        if WinActive("ahk_exe " . Win)
         {
             return True
         }
@@ -26,7 +31,19 @@ NeedsAccents()
     return False
 }
 
-#HotIf NeedsAccents()
+IsExcluded()
+{
+    for Title in ExcludedTitles
+    {
+        if (WinGetTitle("A") = Title)
+        {
+            return True
+        }
+    }
+    return False
+}
+
+#HotIf NeedsAccents() && !IsExcluded()
 
 Trigger := 0
 !e::global Trigger := 1 ; acute
