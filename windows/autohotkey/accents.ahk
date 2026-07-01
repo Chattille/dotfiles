@@ -2,22 +2,9 @@
 
 #NoTrayIcon
 
-Contexts := [
-    "anki.exe",
-    "brave.exe",
-    "EXCEL.EXE",
-    "GoldenDict.exe",
-    "POWERPNT.EXE",
-    "PowerToys.PowerLauncher.exe",
-    "Typora.exe",
-    "Weixin.exe",
-    "WindowsTerminal.exe",
-    "WINWORD.EXE",
-]
-
-ExcludedTitles := [
-    "NetHack",
-]
+ConfPath := EnvGet("USERPROFILE") . "\.config\ahkconfig.ini"
+Contexts := StrSplit(IniRead(ConfPath, "accents", "contexts", ""), ",")
+Excludes := StrSplit(IniRead(ConfPath, "accents", "excludes", ""), ",")
 
 NeedsAccents()
 {
@@ -33,7 +20,7 @@ NeedsAccents()
 
 IsExcluded()
 {
-    for Title in ExcludedTitles
+    for Title in Excludes
     {
         if (WinGetTitle("A") = Title)
         {
