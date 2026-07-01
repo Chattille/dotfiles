@@ -31,7 +31,7 @@ alias rl='trash-list'
 alias rt='trash-empty'
 alias rs='trash-restore'
 alias nr='npm run'
-alias nh="wt.exe --size 90,27 new-tab -p NetHack"
+alias nh="wt.exe --size 92,27 new-tab -p NetHack"
 
 # Git
 alias g='git'
